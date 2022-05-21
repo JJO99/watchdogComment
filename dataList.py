@@ -1,10 +1,8 @@
-import checkContent
-
-
 def makeList(articleAPI_div, commentIndex, subjectIndex):
     comment_list = []
     subject_list = [articleAPI_div[subjectIndex[0]]]
 
+    print('\n')
     print(subject_list[0])
 
     for i in range(len(commentIndex)):
