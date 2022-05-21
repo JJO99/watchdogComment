@@ -4,7 +4,7 @@ import pyperclip
 import personalInfo
 
 def login():
-    driver = webdriver.Chrome('./chromedriver')
+    driver = webdriver.Chrome('./chromedriver.exe') # macos: .exe 빼기 / windows: .exe 붙이기
 
     my_id = personalInfo.id()
     my_pw = personalInfo.pw()
