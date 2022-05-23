@@ -1,6 +1,9 @@
 // Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
+const spawn = require('child_process').spawn;
+
+// const python = spawn('python3',["main.py"]);
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
