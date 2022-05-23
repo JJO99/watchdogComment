@@ -1,10 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import pyperclip
-import personalInfo
+from pythonDIR import personalInfo
 
 def login():
-    driver = webdriver.Chrome('./chromedriver.exe') # macos: .exe 빼기 / windows: .exe 붙이기
+    driver = webdriver.Chrome('/Users/juno/PycharmProjects/watchComment/pythonDIR/chromedriver') # macos: .exe 빼기 / windows: .exe 붙이기
 
     my_id = personalInfo.id()
     my_pw = personalInfo.pw()

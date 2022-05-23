@@ -1,10 +1,7 @@
-import naver, articleID, apiGet, discordBot
+from pythonDIR import naver, articleID, apiGet
 
 alertWord = ["n.news.naver.com", "blog.naver.com", "m.site.naver.com", "bit.ly", "github.com"]
-url = 'https://cafe.naver.com/applytestcafe'
 
 driver = naver.login()
 articleid = articleID.articleIDget()
 apiGet.apiGet(driver, alertWord, articleid)
-
-discordBot()

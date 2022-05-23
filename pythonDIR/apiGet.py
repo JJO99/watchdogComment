@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
-
-import checkContent
-import indexFinder, dataList
+from pythonDIR import checkContent, indexFinder, dataList
 
 def apiGet(driver, word, articleid):
     print('현재 감시 중인 단어: ' + str(word))
