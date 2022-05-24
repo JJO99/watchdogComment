@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from pythonDIR import checkContent, indexFinder, dataList
 
-def apiGet(driver, word, articleid):
-    print('현재 감시 중인 단어: ' + str(word))
+def apiGet(driver, word, articleid, file):
+    print('현재 감시 중인 단어: ' + str(word) + '\n')
 
     for x in range(len(articleid)):
         url2 = 'https://apis.naver.com/cafe-web/cafe-articleapi/v2/cafes/23370764/articles/' + articleid[x] + '/comments/pages/1?requestFrom=A&orderBy=asc'
@@ -15,6 +15,6 @@ def apiGet(driver, word, articleid):
         divData = articleAPI.split('"')
 
         commentIndex, subjectIndex = indexFinder.indexFinder(divData)
-        comment_list = dataList.makeList(divData, commentIndex, subjectIndex)
+        comment_list = dataList.makeList(divData, commentIndex, subjectIndex, file, articleid[x])
 
         checkContent.checkContent(comment_list, word, articleid[x])
