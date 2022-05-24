@@ -8,7 +8,7 @@ const spawn = require('child_process').spawn;
 const python = spawn(py,["main.py"]);
 python.stdout.on('data', function(result) {
 	let resultText = result.toString('utf-8');
-	util.log(resultText);
+	console.log(resultText);
 });
 python.stderr.on('data', function(data) {
     nosuccess(data);

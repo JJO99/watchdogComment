@@ -10,6 +10,4 @@ driver = naver.login()
 articleid = articleID.articleIDget()
 apiGet.apiGet(driver, alertWord, articleid, useFile)
 
-print(useFile)
-
 useFile.close()
