@@ -1,17 +1,17 @@
 // Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js');
 const { token } = require('./pythonDIR/config.json');
-const util = require("util");
+let resultText;
+let forceText = "Only for Test";
 
 const py = "../watchComment/venv/bin/python3.8"
 const spawn = require('child_process').spawn;
 const python = spawn(py,["main.py"]);
 python.stdout.on('data', function(result) {
-	let resultText = result.toString('utf-8');
-	console.log(resultText);
+	resultText = result.toString('utf-8');
 });
 python.stderr.on('data', function(data) {
-    nosuccess(data);
+    console.log('Python error!');
 });
 
 // Create a new client instance
@@ -28,9 +28,9 @@ client.on('interactionCreate', async interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
+		await interaction.reply(resultText);
 	} else if (commandName === 'status') {
-		await interaction.reply('이상 없음');
+		await interaction.reply(forceText);
 	} else if (commandName === 'user') {
 		await interaction.reply('User info.');
 	}
