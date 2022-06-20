@@ -4,7 +4,7 @@ const { token } = require('./pythonDIR/config.json');
 let resultText;
 let forceText = "Only for Test";
 
-const py = "../watchComment/venv/bin/python3.8"
+const py = "../watchdogComment/venv/bin/python3.9"
 const spawn = require('child_process').spawn;
 const python = spawn(py,["main.py"]);
 python.stdout.on('data', function(result) {
