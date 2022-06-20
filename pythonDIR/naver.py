@@ -4,7 +4,7 @@ import pyperclip
 from pythonDIR import personalInfo
 
 def login():
-    driver = webdriver.Chrome('/Users/juno/Project/watchdogComment/pythonDIR/chromedriver') # macos: .exe 빼기 / windows: .exe 붙이기
+    driver = webdriver.Chrome('../watchdogComment/pythonDIR/chromedriver') # macos: .exe 빼기 / windows: .exe 붙이기
 
     my_id = personalInfo.id()
     my_pw = personalInfo.pw()
