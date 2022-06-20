@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from pythonDIR import checkContent, indexFinder, dataList
 
-def apiGet(driver, word, articleid, file):
-    alertID = []
+def commentCheck(driver, word, articleid, file):
+    issueID = []
 
     for x in range(len(articleid)):
         url2 = 'https://apis.naver.com/cafe-web/cafe-articleapi/v2/cafes/23370764/articles/' + articleid[x] + '/comments/pages/1?requestFrom=A&orderBy=asc'
@@ -19,6 +19,6 @@ def apiGet(driver, word, articleid, file):
 
         findID = checkContent.checkContent(comment_list, word, articleid[x])
 
-        alertID.append(findID)
+        issueID.append(findID)
 
-    return alertID
+    return issueID
