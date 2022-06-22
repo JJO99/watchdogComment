@@ -4,10 +4,16 @@ import pyperclip
 from pythonDIR import personalInfo
 
 def login():
-    driver = webdriver.Chrome('../watchdogComment/pythonDIR/chromedriver') # macos: .exe 빼기 / windows: .exe 붙이기
 
     my_id = personalInfo.id()
     my_pw = personalInfo.pw()
+
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    options.add_argument("disable-gpu")
+    options.add_argument(
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.108 Whale/3.15.136.18 Safari/537.36")
+    driver = webdriver.Chrome('../watchdogComment/pythonDIR/chromedriver', chrome_options=options) # macos: .exe 빼기 / windows: .exe 붙이기
 
     driver.get("http://naver.com")  # 네이버 접속
     driver.implicitly_wait(3)
