@@ -15,7 +15,7 @@ def login():
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.108 Whale/3.15.136.18 Safari/537.36")
     driver = webdriver.Chrome('../watchdogComment/pythonDIR/chromedriver', chrome_options=options) # macos: .exe 빼기 / windows: .exe 붙이기
 
-    driver.get("http://naver.com")  # 네이버 접속
+    driver.get("https://naver.com")  # 네이버 접속
     driver.implicitly_wait(3)
     driver.find_element_by_xpath('//*[@id="account"]/a').click()  # NAVER 로그인 클릭
 
