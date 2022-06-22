@@ -1,10 +1,15 @@
 def checkContent(comment, word):
-    for x in comment:
-        y = x.replace('\n', ' ')
-        y = y.split(' ')
-        for i in y:
-            if i in word:
-                return x
+    c = 0
+
+    y = comment.replace('\n', ' ').replace('\r', '').replace('\t', '')
+    y = y.split(' ')
+
+    for i in y:
+        i = i.split('/')
+        for j in i:
+            if j in word:
+                c = 1
             else:
                 continue
-    return 0
+
+    return c

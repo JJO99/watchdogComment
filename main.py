@@ -13,14 +13,13 @@ driver = naver.login()
 # 1. json return
 json = jsonGet.jsonget(articleid, driver)
 
-# 2. json에서 원하는 요소를 찾아서 변수에 저장하기
-content = jsonanalysis.jsonanalysis(json)
+# 2. json에서 원하는 요소를 찾아서 변수에 저장하기 + content 분석
+noti = jsonanalysis.jsonanalysis(json)
 
-# 3. content 분석
-
-
+issueURL = None
 #문제 있는 articleID를 받아 URL로 변환
-issueURL = alertURLback.urlBack(issueID)
+if not noti == []:
+    issueURL = alertURLback.urlBack(noti)
 
 print('기준 시간: ' + str(now))
 
@@ -28,5 +27,3 @@ if issueURL is None:
     print("댓글 이상 없음")
 else:
     print(issueURL)
-
-useFile.close()

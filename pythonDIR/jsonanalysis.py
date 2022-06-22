@@ -1,10 +1,7 @@
-from bs4 import BeautifulSoup
-from pythonDIR import checkContent, indexFinder, dataList
-import requests
+from pythonDIR import checkContent
 
 #알람으로 설정할 파일
-alertWord = ["m.site.naver.com", "bit.ly", "open.kakao.com", "몇주후에"]
-
+alertWord = ["m.site.naver.com", "bit.ly", "open.kakao.com", "아무래도"]
 
 def jsonanalysis(javascript):
     noti =[]
