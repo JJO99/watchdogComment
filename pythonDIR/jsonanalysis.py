@@ -47,3 +47,18 @@ def article_writer(json):
 def comment_writer(json):
 
     return 0
+
+
+def comment_number(json):
+
+    return 0
+
+
+def comment_time(json):
+
+    return 0
+
+
+def article_time(json):
+
+    return 0

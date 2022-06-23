@@ -8,10 +8,12 @@ articleid = articleID.articleIDget()
 
 #네이버 자동 로그인
 driver = naver.login()
+now1 = datetime.datetime.now()
 
 # json API 이용
 # 1. json return
 json = jsonGet.jsonget(articleid, driver)
+now2 = datetime.datetime.now()
 
 # 2. json에서 원하는 요소를 찾아서 변수에 저장하기 + content 분석
 alertComment = jsonanalysis.comment(json)
@@ -22,8 +24,10 @@ if not alertComment == []:
     issuecomment = alertURLback.urlBack(alertComment)
 if not alertArticle == []:
     issuearticle = alertURLback.urlBack(alertArticle)
+now3 = datetime.datetime.now()
 
 print('기준 시간: ' + str(now))
+print(str(now1-now) + '초'); print(str(now2-now1) + '초'); print(str(now3-now2) + '초\n')
 
 if issuecomment is None:
     print("댓글 이상 없음")
