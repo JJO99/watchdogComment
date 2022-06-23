@@ -1,7 +1,9 @@
 from pythonDIR import checkContent
+from bs4 import BeautifulSoup
+
 
 #알람으로 설정할 파일
-alertWord = ["m.site.naver.com", "bit.ly", "open.kakao.com", "아무래도"]
+alertWord = ["m.site.naver.com", "bit.ly", "open.kakao.com", "아무래도", "2014년", "경기도", "원래는"]
 
 def comment(json):
     noti =[]
@@ -9,7 +11,7 @@ def comment(json):
         a = json[k]['result']['comments']['items']
         for i in a:
             content = i['content']
-            n = checkContent.checkContent(content, alertWord)
+            n = checkContent.checkComment(content, alertWord)
             if n == 1:
                 noti.append(json[k]['result']['articleId'])
 
@@ -17,12 +19,24 @@ def comment(json):
 
 
 def article(json):
-    temp = []
-    json = json[0]
+    result = []
 
-    a = json['result']['article']['contentHtml']
+    for i in range(0, 10):
+        js = json[i]
 
-    return a
+        a = js['result']['article']['contentHtml']
+
+        soup = BeautifulSoup(a, 'html.parser')
+        m = soup.get_text()
+        m = m.replace('\n', '')
+        m = m.split('.')
+        for x in m:
+            x = x.split(' ')
+            n = checkContent.checkArticle(x, alertWord)
+            if n == 1:
+                result.append(js['result']['articleId'])
+
+    return result
 
 
 def article_writer(json):

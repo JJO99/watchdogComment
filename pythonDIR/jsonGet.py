@@ -10,4 +10,5 @@ def jsonget(articleid, driver):
         cr = json.loads(cr)
         value.append(cr)
 
+    print("JSON Get")
     return value

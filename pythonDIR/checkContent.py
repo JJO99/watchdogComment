@@ -1,4 +1,4 @@
-def checkContent(comment, word):
+def checkComment(comment, word):
     c = 0
 
     y = comment.replace('\n', ' ').replace('\r', '').replace('\t', '')
@@ -11,5 +11,17 @@ def checkContent(comment, word):
                 c = 1
             else:
                 continue
+
+    return c
+
+
+def checkArticle(article, word):
+    c = 0
+
+    for i in article:
+        if i in word:
+            c = 1
+        else:
+            continue
 
     return c
