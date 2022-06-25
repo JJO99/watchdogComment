@@ -2,8 +2,9 @@ from pythonDIR import checkContent
 from bs4 import BeautifulSoup
 
 
-#알람으로 설정할 파일
-alertWord = ["m.site.naver.com", "bit.ly", "open.kakao.com", "아무래도", "2014년", "경기도", "원래는"]
+# 알람 설정할 파일
+alertWord = ["m.site.naver.com", "bit.ly", "open.kakao.com"]
+
 
 def comment(json):
     noti =[]
