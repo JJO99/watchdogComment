@@ -1,12 +1,11 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-import pyperclip
 from pythonDIR import personalInfo
+from selenium.webdriver.common.by import By
 
 def login():
 
-    my_id = personalInfo.id()
-    my_pw = personalInfo.pw()
+    naver_id = personalInfo.id()
+    naver_pw = personalInfo.pw()
 
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
@@ -17,15 +16,12 @@ def login():
 
     driver.get("https://naver.com")  # 네이버 접속
     driver.implicitly_wait(3)
-    driver.find_element_by_xpath('//*[@id="account"]/a').click()  # NAVER 로그인 클릭
+    driver.find_element(By.XPATH, '//*[@id="account"]/a').click()
 
-    pyperclip.copy(my_id)  # id 복사
-    driver.find_element_by_xpath('//*[@id="id"]').send_keys(Keys.COMMAND, 'v')  # id 붙여넣기
-    driver.implicitly_wait(5)
-    pyperclip.copy(my_pw)  # 비밀번호 복사
-    driver.find_element_by_xpath('//*[@id="pw"]').send_keys(Keys.COMMAND, 'v')  # 비밀번호 붙여넣기
-    driver.implicitly_wait(5)
-    driver.find_element_by_xpath('//*[@id="log.login"]').click()  # 로그인 클릭
+    driver.execute_script("document.getElementsByName('id')[0].value=\'" + naver_id + "\'")
+    driver.execute_script("document.getElementsByName('pw')[0].value=\'" + naver_pw + "\'")
+    # https://2dowon.github.io/docs/python/google-naver-daum-automatic-login/
+    driver.find_element(By.XPATH, '//*[@id="log.login"]').click()  # 로그인 클릭
     driver.implicitly_wait(5)
 
     print("Driver Pass")
