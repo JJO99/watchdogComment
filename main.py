@@ -1,5 +1,5 @@
 import datetime
-from pythonDIR import naver, articleID, jsonanalysis, alertURLback, jsonGet
+from pythonDIR import naver, articleID, jsonanalysis, alertURLback, jsonGet, result
 
 now = datetime.datetime.now()
 
@@ -19,20 +19,10 @@ now2 = datetime.datetime.now()
 alertComment = jsonanalysis.comment(json)
 alertArticle = jsonanalysis.article(json)
 
-print('기준 시간: ' + str(now))
-
-#문제 있는 articleID를 받아 URL로 변환
-if not alertComment == []:
-    issuecomment = alertURLback.urlBack(alertComment)
-    print("이상 댓글: " + str(issuecomment))
-else:
-    print("댓글 이상 없음")
-if not alertArticle == []:
-    issuearticle = alertURLback.urlBack(alertArticle)
-    print("이상 게시글: " + str(issuearticle))
-else:
-    print("게시글 이상 없음")
+result.res(alertComment, alertArticle, now)
 
 now3 = datetime.datetime.now()
 
-print('\n소요시간\n' + str(now1-now) + '초'); print(str(now2-now1) + '초'); print(str(now3-now2) + '초')
+print('\n<<소요시간>>\n' + '드라이버 로그인: ' + str(now1-now) + '초');
+print('JSON 파일 크롤링: ' + str(now2-now1) + '초');
+print('내용 검사: ' + str(now3-now2) + '초')
