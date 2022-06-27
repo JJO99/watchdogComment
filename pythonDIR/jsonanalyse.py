@@ -12,21 +12,21 @@ class check:
 
         cr = self.driver.find_element_by_xpath('/html/body/pre').text
         cr = json.loads(cr)
-
         self.jsonfile = cr
 
-        self.commenttext = None
-        self.articletext = None
+        self.commenttext = []
+        comment_item = self.jsonfile['result']['comments']['items']
+        for x in comment_item:
+            self.commenttext.append(x['content'])
+        self.articletext = self.jsonfile['result']['article']['contentHtml']
         self.word = alertword.word()
 
     def commentcheck(self):
         word = self.word
-        a = self.jsonfile['result']['comments']['items']
-        self.commenttext = a
+        a = self.commenttext
 
         for i in a:
-            content = i['content']
-            n = checkContent.checkComment(content, word)
+            n = checkContent.checkComment(i, word)
             if n == 1:
                 return self.articleid
             else:
@@ -35,9 +35,7 @@ class check:
 
     def articlecheck(self):
         word = self.word
-        js = self.jsonfile
-
-        a = js['result']['article']['contentHtml']
+        a = self.articletext
 
         soup = BeautifulSoup(a, 'html.parser')
         m = soup.get_text()
@@ -52,7 +50,11 @@ class check:
                 return None
 
     def comment(self):
-        return self.commenttext
+        result = []
+        y = self.commenttext
+        for x in y:
+           result.append(x.replace('\n', ' ').replace('\r', '').replace('\t', ''))
+        return result
 
     def article(self):
         return self.articletext
