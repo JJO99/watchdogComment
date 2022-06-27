@@ -2,7 +2,6 @@ import json
 from pythonDIR import alertword, checkContent
 from bs4 import BeautifulSoup
 
-# jsonanalysis to class
 class check:
     def __init__(self, driver, articleid):
         self.driver = driver

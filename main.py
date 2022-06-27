@@ -28,4 +28,3 @@ if not urllist == None:
     print("이상 게시글: " + str(urllist))
 else:
     print("게시글 이상 없음")
-
