@@ -25,8 +25,7 @@ if not idlist == None:
 
 print('\n기준 시간: ' + str(now))
 if not urllist == None:
-    article = alertURLback.urlBack(urllist)
-    print("이상 게시글: " + str(article))
+    print("이상 게시글: " + str(urllist))
 else:
     print("게시글 이상 없음")
 
