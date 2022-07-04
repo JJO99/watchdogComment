@@ -8,7 +8,7 @@ def login():
     # chromedriver 자동 업데이트
     # https://codechacha.com/ko/python-selenium-chromedriver-autoinstaller/
     v = driverupdate.get_chrome_version().split('.')[0]
-    driverpath = f'../watchdogComment/pythonDIR/{v}/chromedriver'
+    driverpath = f'../pythonDIR/{v}/chromedriver'
     if not os.path.exists(driverpath):
         driverupdate.install(False, '../watchdogComment/pythonDIR/')
         print("Driver Update")
@@ -32,8 +32,6 @@ def login():
     # https://2dowon.github.io/docs/python/google-naver-daum-automatic-login/
     driver.find_element(By.XPATH, '//*[@id="log.login"]').click()  # 로그인 클릭
     driver.implicitly_wait(5)
-
-    print("Login Success")
 
     return driver
 
