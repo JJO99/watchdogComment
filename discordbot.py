@@ -1,8 +1,10 @@
 import discord, main
-from pythonDIR import personalInfo
+from pythonDIR import personalInfo, naver
 from discord.ext import tasks
 
 client = discord.Client()
+driver = naver.login()
+
 
 @client.event
 async def on_ready():
@@ -18,10 +20,10 @@ async def on_message(message):
         await message.channel.send("*****체크하는 중*****")
         print('Checking')
 
-        urllist,now = main.watch()
+        urllist,now = main.watch(driver)
         time = "기준시간: " + now
         if not urllist == "0":
-            url = "이상 게시글: " + urllist
+            url = "@everyone 이상 게시글: " + urllist
         else:
             url = "이상 게시글이 없습니다."
 
