@@ -32,7 +32,6 @@ class check:
             else:
                 return None
 
-
     def articlecheck(self):
         word = self.word
         a = self.articletext
