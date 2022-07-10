@@ -1,5 +1,5 @@
 import datetime
-from pythonDIR import naver, articleID, alertURLback, jsonanalyse
+from pythonDIR import articleID, alertURLback, jsonanalyse
 
 
 def watch(driver):

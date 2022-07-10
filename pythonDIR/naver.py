@@ -8,7 +8,7 @@ def login():
     # chromedriver 자동 업데이트
     # https://codechacha.com/ko/python-selenium-chromedriver-autoinstaller/
     v = driverupdate.get_chrome_version().split('.')[0]
-    driverpath = f'/Users/juno/Project/watchdogComment/pythonDIR/{v}/chromedriver'
+    driverpath = f'../watchdogComment/pythonDIR/{v}/chromedriver'
     if not os.path.exists(driverpath):
         driverupdate.install(False, '../watchdogComment/pythonDIR/')
         print("Driver Update")
