@@ -1,6 +1,8 @@
 import json
 from pythonDIR import alertword, checkContent
+from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
+
 
 class check:
     def __init__(self, driver, articleid):
@@ -10,7 +12,7 @@ class check:
         url = 'https://apis.naver.com/cafe-web/cafe-articleapi/v2/cafes/23370764/articles/' + self.articleid
         self.driver.get(url)
 
-        cr = self.driver.find_element_by_xpath('/html/body/pre').text
+        cr = self.driver.find_element(By.XPATH, '/html/body/pre').text
         cr = json.loads(cr)
         self.jsonfile = cr
 
