@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 class check:
-    def __init__(self, driver, articleid):
+    def __init__(self, driver, articleid, word):
         self.driver = driver
         self.articleid = articleid
 
@@ -21,7 +21,7 @@ class check:
         for x in comment_item:
             self.commenttext.append(x['content'])
         self.articletext = self.jsonfile['result']['article']['contentHtml']
-        self.word = alertword.word()
+        self.word = word
 
     def commentcheck(self):
         word = self.word
