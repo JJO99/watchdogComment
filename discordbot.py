@@ -1,7 +1,6 @@
 from discord.ext import tasks
-from pythonDIR import personalInfo, naver, jsonanalyse
-
-import discord, main
+from pythonDIR import personalInfo, naver, jsonanalyse, articleID
+import discord, analysemain, main, datetime
 
 driver = naver.login()
 word = "m.site.naver.com", "bit.ly", "open.kakao.com"
@@ -10,12 +9,9 @@ word = "m.site.naver.com", "bit.ly", "open.kakao.com"
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # an attribute we can access from our task
-        self.counter = 0
-
         # start the task to run in the background
         self.my_background_task.start()
+        self.now = str(datetime.datetime.now())
 
         global word
 
@@ -36,14 +32,13 @@ class MyClient(discord.Client):
 
         embed2 = discord.Embed(title="감시봇", colour=color)
         embed2.set_author(name="DEVELOID BOT(ALPHA)")
-        urllist, now = main.watch(driver)
-        time = "기준시간: " + now
+        articleid = articleID.articleIDget()
+
+        urllist = analysemain.Analyse(driver, articleid, word)
+        time = "기준시간: " + self.now
         if not urllist == "0":
             url = "everyone 이상 게시글: " + urllist
             embed2.add_field(name="**확인 결과**", value=url, inline=False)
-            domain = jsonanalyse.check(driver, urllist)
-            comment = domain.comment()
-            embed2.add_field(name="게시글 댓글", value=comment, inline=False)
 
         else:
             url = "이상 게시글이 없습니다."
