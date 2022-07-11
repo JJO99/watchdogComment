@@ -8,9 +8,6 @@ def watch(driver):
     # articleID 크롤링 - 로그인 필요가 없음
     articleid = articleID.articleIDget()
 
-    # 네이버 자동 로그인
-
-
     idlist = []
     for i in articleid:
         cube = jsonanalyse.check(driver, i)
@@ -24,8 +21,6 @@ def watch(driver):
     idlist = list(set(idlist))
     if not idlist == None:
         urllist = alertURLback.urlBack(idlist)
-
-
     if not urllist == None:
         urllist = str(urllist)
     else:
