@@ -34,10 +34,15 @@ class MyClient(discord.Client):
         embed2.set_author(name="DEVELOID BOT(ALPHA)")
         articleid = articleID.articleIDget()
 
-        urllist = analysemain.Analyse(driver, articleid, word)
+        urllist = []
+        for x in articleid:
+            temp = analysemain.Analyse(driver, x, word)
+            get = temp.one_total_check()
+        urllist = list(set(urllist))
+
         time = "기준시간: " + self.now
-        if not urllist == "0":
-            url = "everyone 이상 게시글: " + urllist
+        if not urllist is []:
+            url = "everyone 이상 게시글: " + str(urllist)
             embed2.add_field(name="**확인 결과**", value=url, inline=False)
 
         else:
