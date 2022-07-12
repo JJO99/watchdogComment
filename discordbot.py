@@ -1,9 +1,9 @@
 from discord.ext import tasks
-from pythonDIR import personalInfo, naver, jsonanalyse, articleID
+from pythonDIR import personalInfo, naver, articleID
 import discord, analysemain, datetime
 
 driver = naver.login()
-word = "m.site.naver.com", "bit.ly", "open.kakao.com", "제닉스입니다", "드디어"
+word = "m.site.naver.com", "bit.ly", "open.kakao.com", "제닉스입니다", "드디어", "여전히"
 
 
 class MyClient(discord.Client):
@@ -45,7 +45,7 @@ class MyClient(discord.Client):
             url_list.remove(None)
 
         time = "기준 시간: " + self.now
-        if not len(url_list) == 1:
+        if not len(url_list) == 0:
             url = "everyone 이상 게시글: " + str(url_list)
             embed2.add_field(name="**확인 결과**", value=url, inline=False)
 
