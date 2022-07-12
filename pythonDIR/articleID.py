@@ -1,8 +1,9 @@
 import requests
+import json
 from bs4 import BeautifulSoup
 
 
-def recent_article_id_get ():
+def recent_article_id_get():
     articleid = []
     url = 'https://cafe.naver.com/develoid'
     # 최신 댓글이 달린 게시글을 긁어오기
@@ -14,26 +15,22 @@ def recent_article_id_get ():
     temp = [1,2,3,4,5]
     for x in temp:
         x = str(x)
-        rawData = soup.select_one('#first-reply-page > li:nth-child(' + x + ') > a')
-        # li:nth-child(N) --> N을 로테이션 돌려야
-        # first --> second
-        # first-reply-page > li:nth-child(1) > a
-        # 함수 형태로 구현한 다음, 게시글 5개를 전부다 사이클 돌리게 제작?
-        rawData = str(rawData)
-        rawData_div = rawData.split("articleid=")
-        rawData_div2 = rawData_div[1].split('"')
-        articleid.append(rawData_div2[0])
+        rawdata = str(soup.select('#first-reply-page'))
+        firstsplit = rawdata.split("articleid=")
+        secondsplit = []
+        for x in firstsplit:
+            secondsplit.append(x.split('"'))
+        for x in temp:
+            articleid.append(secondsplit[x][0])
 
     for x in temp:
         x = str(x)
-        rawData = soup.select_one('#second-reply-page > li:nth-child(' + x + ') > a')
-        # li:nth-child(N) --> N을 로테이션 돌려야
-        # first --> second
-
-        # 함수 형태로 구현한 다음, 게시글 5개를 전부다 사이클 돌리게 제작?
-        rawData = str(rawData)
-        rawData_div = rawData.split("articleid=")
-        rawData_div2 = rawData_div[1].split('"')
-        articleid.append(rawData_div2[0])
+        rawdata = str(soup.select('#second-reply-page'))
+        firstsplit = rawdata.split("articleid=")
+        secondsplit = []
+        for x in firstsplit:
+            secondsplit.append(x.split('"'))
+        for x in temp:
+            articleid.append(secondsplit[x][0])
 
     return articleid
