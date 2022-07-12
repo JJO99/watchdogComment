@@ -3,7 +3,7 @@ import json
 from bs4 import BeautifulSoup
 
 
-def recent_article_id_get():
+def recent_article_id_get ():
     articleid = []
     url = 'https://cafe.naver.com/develoid'
     # 최신 댓글이 달린 게시글을 긁어오기
