@@ -3,7 +3,7 @@ from pythonDIR import personalInfo, naver, jsonanalyse, articleID
 import discord, analysemain, datetime
 
 driver = naver.login()
-word = "m.site.naver.com", "bit.ly", "open.kakao.com", "ㅎㅎ화면도", "말이죠"
+word = "m.site.naver.com", "bit.ly", "open.kakao.com", "제닉스입니다", "드디어"
 
 
 class MyClient(discord.Client):
@@ -26,24 +26,27 @@ class MyClient(discord.Client):
 
         embed1 = discord.Embed(title="감시봇", colour=color)
         embed1.set_author(name="DEVELOID BOT(ALPHA)")
-        embed1.add_field(name="**확인 하는 중**", value="약 2초가량 소요됩니다.")
-        await channel.send(embed=embed1, delete_after=3)
+        embed1.add_field(name="**확인 하는 중**", value="약 10초가량 소요됩니다.")
+        await channel.send(embed=embed1, delete_after=10)
         print('Checking')
 
         embed2 = discord.Embed(title="감시봇", colour=color)
         embed2.set_author(name="DEVELOID BOT(ALPHA)")
-        articleid = articleID.recent_article_id_get()
 
-        urllist = []
-        for x in articleid:
+        article_id = list(set(articleID.recent_article_id_get() + articleID.all_article_id_get()))
+
+        url_list = []
+        for x in article_id:
             temp = analysemain.Analyse(driver, x, word)
             get = temp.one_total_check()
-            urllist.append(get)
-        urllist = list(set(urllist))
+            url_list.append(get)
 
-        time = "기준시간: " + self.now
-        if not len(urllist) == 1:
-            url = "everyone 이상 게시글: " + str(urllist)
+        while None in url_list:
+            url_list.remove(None)
+
+        time = "기준 시간: " + self.now
+        if not len(url_list) == 1:
+            url = "everyone 이상 게시글: " + str(url_list)
             embed2.add_field(name="**확인 결과**", value=url, inline=False)
 
         else:
