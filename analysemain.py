@@ -8,7 +8,8 @@ class Analyse(jsonanalyse.check):
         if m is None and n is None:
             return None
         else:
-            url = alertURLback.urlBack(self.articleid)
+            a = self.articleid
+            url = alertURLback.one_url_return(a)
             return url
 
     def list_total_check(self):

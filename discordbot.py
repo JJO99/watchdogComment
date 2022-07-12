@@ -1,9 +1,9 @@
 from discord.ext import tasks
 from pythonDIR import personalInfo, naver, jsonanalyse, articleID
-import discord, analysemain, main, datetime
+import discord, analysemain, datetime
 
 driver = naver.login()
-word = "m.site.naver.com", "bit.ly", "open.kakao.com"
+word = "m.site.naver.com", "bit.ly", "open.kakao.com", "ㅎㅎ화면도", "말이죠"
 
 
 class MyClient(discord.Client):
@@ -42,7 +42,7 @@ class MyClient(discord.Client):
         urllist = list(set(urllist))
 
         time = "기준시간: " + self.now
-        if not urllist[0] is None:
+        if not len(urllist) == 1:
             url = "everyone 이상 게시글: " + str(urllist)
             embed2.add_field(name="**확인 결과**", value=url, inline=False)
 

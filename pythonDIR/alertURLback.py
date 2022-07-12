@@ -11,3 +11,7 @@ def urlBack(list):
         return None
     else:
         return issueURL
+
+
+def one_url_return(id):
+    return "https://cafe.naver.com/develoid/" + str(id)

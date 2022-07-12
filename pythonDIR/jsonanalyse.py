@@ -1,5 +1,5 @@
 import json
-from pythonDIR import alertword, checkContent
+from pythonDIR import checkContent
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
