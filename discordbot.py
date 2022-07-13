@@ -4,7 +4,7 @@ import discord, analysemain, datetime
 
 driver = naver.login()
 word = "m.site.naver.com", "bit.ly", "open.kakao.com", "제닉스입니다", "드디어", "여전히"
-
+# pip install -r requirements.txt
 
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):

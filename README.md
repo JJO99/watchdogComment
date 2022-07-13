@@ -14,3 +14,8 @@ https://github.com/JJO99/watchdogComment/issues?q=
 
 ## 개발
 디벨로이드
+
+### 타 운영체제 작업시
+1. pycharm 으로 VCS 연결
+2. 인터프리터 추가
+3. pip install -r requirements.txt

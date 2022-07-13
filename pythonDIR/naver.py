@@ -4,12 +4,13 @@ from selenium.webdriver.common.by import By
 import chromedriver_autoinstaller as driverupdate
 import os
 
+
 def login():
     # chromedriver 자동 업데이트
     # https://codechacha.com/ko/python-selenium-chromedriver-autoinstaller/
     v = driverupdate.get_chrome_version().split('.')[0]
-    driverpath = f'../watchdogComment/pythonDIR/{v}/chromedriver'
-    if not os.path.exists(driverpath):
+    driver_path = f'../watchdogComment/pythonDIR/{v}/chromedriver'
+    if not os.path.exists(driver_path):
         driverupdate.install(False, '../watchdogComment/pythonDIR/')
         print("Driver Update")
 
@@ -21,7 +22,7 @@ def login():
     options.add_argument("disable-gpu")
     options.add_argument(
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.108 Safari/537.36")
-    driver = webdriver.Chrome(driverpath, chrome_options=options) # macos: .exe 빼기 / windows: .exe 붙이기
+    driver = webdriver.Chrome(driver_path, chrome_options=options) # macos: .exe 빼기 / windows: .exe 붙이기
 
     driver.get("https://naver.com")  # 네이버 접속
     driver.implicitly_wait(3)

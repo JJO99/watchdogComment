@@ -83,3 +83,4 @@ fabric.properties
 .env
 /pnpm-lock.yaml
 /yarn.lock
+/pythonDIR/103/
