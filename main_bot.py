@@ -2,7 +2,7 @@ from discord.ext import tasks
 from pythonDIR import personalInfo, auto_login, make_embed
 import discord
 driver = auto_login.login()
-word = "m.site.naver.com", "bit.ly", "open.kakao.com", "제닉스입니다", "드디어", "여전히", "카톡", "초보자", "오늘", "신청합니다"
+word = "m.site.naver.com", "bit.ly", "open.kakao.com", "카톡"
 # pip install -r requirements.txt
 
 
@@ -17,7 +17,7 @@ class MyClient(discord.Client):
     async def on_ready(self):
         print('봇 로그인 성공')
 
-    @tasks.loop(seconds=600)  # task runs every 60 seconds
+    @tasks.loop(seconds=300)  # task runs every 60 seconds
     async def my_background_task(self):
         channel = self.get_channel(personalInfo.chanid())  # channel ID goes here
         color = discord.Color.from_rgb(31, 132, 255)
