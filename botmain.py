@@ -1,7 +1,7 @@
 from discord.ext import tasks
-from pythonDIR import personalInfo, naver, articleID, make_embed
-import discord, analysemain, datetime
-
+from pythonDIR import personalInfo, naver, make_embed
+import discord
+import time
 driver = naver.login()
 word = "m.site.naver.com", "bit.ly", "open.kakao.com", "제닉스입니다", "드디어", "여전히", "카톡", "초보자", "오늘", "신청합니다"
 # pip install -r requirements.txt
@@ -12,7 +12,6 @@ class MyClient(discord.Client):
         super().__init__(*args, **kwargs)
         # start the task to run in the background
         self.my_background_task.start()
-        self.now = str(datetime.datetime.now())
 
         global word
 
@@ -28,7 +27,7 @@ class MyClient(discord.Client):
         await channel.send(embed=embed1, delete_after=10)
         print('Checking')
 
-        embed2 = make_embed.end_embed(color, driver, word, self.now)
+        embed2 = make_embed.end_embed(color, driver, word)
         await channel.send(embed=embed2)
         print('Checked')
 

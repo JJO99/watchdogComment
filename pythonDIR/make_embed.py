@@ -1,4 +1,6 @@
-import discord, analysemain
+import discord
+import datetime
+import analysemain
 from pythonDIR import articleID
 
 
@@ -6,10 +8,12 @@ def start_embed(color):
     embed = discord.Embed(title="감시봇", colour=color)
     embed.set_author(name="DEVELOID BOT(ALPHA)")
     embed.add_field(name="**확인 하는 중**", value="약 10초가량 소요됩니다.")
+
     return embed
 
 
-def end_embed(color, driver, word, now):
+def end_embed(color, driver, word):
+    now = str(datetime.datetime.now())
     embed = discord.Embed(title="감시봇", colour=color)
     embed.set_author(name="DEVELOID BOT(ALPHA)")
 
