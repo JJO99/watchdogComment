@@ -1,5 +1,5 @@
 import json
-from pythonDIR import checkContent
+from pythonDIR import check_content
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
@@ -28,7 +28,7 @@ class check:
         a = self.commenttext
 
         for i in a:
-            n = checkContent.checkComment(i, word)
+            n = check_content.checkComment(i, word)
             if n == 1:
                 return self.articleid
             else:
@@ -44,7 +44,7 @@ class check:
         m = m.split('.')
         for x in m:
             x = x.split(' ')
-            n = checkContent.checkArticle(x, word)
+            n = check_content.checkArticle(x, word)
             if n == 1:
                 return self.articleid
             else:

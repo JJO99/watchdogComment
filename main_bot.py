@@ -1,5 +1,5 @@
 from discord.ext import tasks
-from pythonDIR import personalInfo, naver, make_embed
+from pythonDIR import personalInfo, auto_login, make_embed
 import discord
 import time
 driver = naver.login()

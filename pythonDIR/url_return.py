@@ -1,4 +1,4 @@
-def urlBack(list):
+def list_url_return(list):
     issueURL = []
     for x in range(len(list)):
         if list[x] != 0:

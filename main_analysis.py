@@ -1,4 +1,4 @@
-from pythonDIR import jsonanalyse, alertURLback
+from pythonDIR import json_analysis, url_return
 
 
 class Analyse(jsonanalyse.check):
@@ -9,7 +9,7 @@ class Analyse(jsonanalyse.check):
             return None
         else:
             a = self.articleid
-            url = alertURLback.one_url_return(a)
+            url = url_return.one_url_return(a)
             return url
 
     def list_total_check(self):
@@ -26,7 +26,7 @@ class Analyse(jsonanalyse.check):
 
         idlist = list(set(idlist))
         if not idlist is None:
-            urllist = alertURLback.urlBack(idlist)
+            urllist = url_return.list_url_return(idlist)
             urllist = str(urllist)
             return urllist
         else:

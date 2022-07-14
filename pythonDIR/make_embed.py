@@ -1,7 +1,7 @@
 import discord
 import datetime
-import analysemain
-from pythonDIR import articleID
+import main_analysis
+from pythonDIR import article_id_get
 
 
 def start_embed(color):
