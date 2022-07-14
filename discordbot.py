@@ -3,7 +3,7 @@ from pythonDIR import personalInfo, naver, articleID
 import discord, analysemain, datetime
 
 driver = naver.login()
-word = "m.site.naver.com", "bit.ly", "open.kakao.com", "제닉스입니다", "드디어", "여전히"
+경word = "m.site.naver.com", "bit.ly", "open.kakao.com", "제닉스입니다", "드디어", "여전히", "카톡", "초보자"
 # pip install -r requirements.txt
 
 class MyClient(discord.Client):
@@ -44,15 +44,16 @@ class MyClient(discord.Client):
         while None in url_list:
             url_list.remove(None)
 
-        time = "기준 시간: " + self.now
         if not len(url_list) == 0:
             url = "everyone 이상 게시글: " + str(url_list)
             embed2.add_field(name="**확인 결과**", value=url, inline=False)
-
         else:
             url = "이상 게시글이 없습니다."
             embed2.add_field(name="**확인 결과**", value=url)
+
+        time = "기준 시간: " + self.now
         embed2.set_footer(text=time)
+
         await channel.send(embed=embed2)
 
         print('Checked')
