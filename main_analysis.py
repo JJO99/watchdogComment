@@ -1,7 +1,7 @@
 from pythonDIR import json_analysis, url_return
 
 
-class Analyse(jsonanalyse.check):
+class Analyse(json_analysis.check):
     def one_total_check(self):
         m = self.articlecheck()
         n = self.commentcheck()
@@ -15,7 +15,7 @@ class Analyse(jsonanalyse.check):
     def list_total_check(self):
         idlist = []
         for i in self.articleid:
-            cube = jsonanalyse.check(self.driver, i)
+            cube = json_analysis.check(self.driver, i)
             n = cube.articlecheck()
             m = cube.commentcheck()
             if m is None and n is None:

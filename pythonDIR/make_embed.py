@@ -17,11 +17,11 @@ def end_embed(color, driver, word):
     embed = discord.Embed(title="감시봇", colour=color)
     embed.set_author(name="DEVELOID BOT(ALPHA)")
 
-    article_id = list(set(articleID.recent_article_id_get() + articleID.all_article_id_get()))
+    article_id = list(set(article_id_get.recent_article_id_get() + article_id_get.all_article_id_get()))
 
     url_list = []
     for x in article_id:
-        temp = analysemain.Analyse(driver, x, word)
+        temp = main_analysis.Analyse(driver, x, word)
         get = temp.one_total_check()
         url_list.append(get)
 
