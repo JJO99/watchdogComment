@@ -1,8 +1,11 @@
 from discord.ext import tasks
 from pythonDIR import personalInfo, auto_login, make_embed
 import discord
+import datetime
+print(datetime.datetime.now())
 driver = auto_login.login()
-word = "m.site.naver.com", "bit.ly", "open.kakao.com", "카톡"
+print(datetime.datetime.now())
+word = "m.site.naver.com", "bit.ly", "open.kakao.com", "카톡", "ㅅㅂ"
 # pip install -r requirements.txt
 
 
@@ -16,6 +19,7 @@ class MyClient(discord.Client):
 
     async def on_ready(self):
         print('봇 로그인 성공')
+        print(datetime.datetime.now())
 
     @tasks.loop(seconds=300)  # task runs every 60 seconds
     async def my_background_task(self):
@@ -25,10 +29,12 @@ class MyClient(discord.Client):
         embed1 = make_embed.start_embed(color)
         await channel.send(embed=embed1, delete_after=10)
         print('Checking')
+        print(datetime.datetime.now())
 
         embed2 = make_embed.end_embed(color, driver, word)
         await channel.send(embed=embed2)
         print('Checked')
+        print(datetime.datetime.now())
 
     @my_background_task.before_loop
     async def before_my_task(self):
