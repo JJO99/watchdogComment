@@ -52,4 +52,15 @@ def all_article_id_get():
     return article_id
 
 
+def photo_id_get():
+    url = "https://cafe.naver.com/ArticleList.nhn?search.clubid=23370764&search.menuid=7&search.boardtype=L&userDisplay=15&search.headid=2391"
+    c_id = []
+    r = requests.get(url)
+    html = r.text
+    soup = BeautifulSoup(html, 'html.parser')
+    for n in range(1, 21, 1):
+        n = str(n)
+        c = str(soup.select(
+            "#main-area>div:nth-child(4)> table > tbody > tr:nth-child(" + n + ") > td.td_article > div.board-number > div"))
+        c_id.append(c)
 

@@ -6,7 +6,8 @@ print(datetime.datetime.now())
 driver = auto_login.login()
 print(datetime.datetime.now())
 word = "m.site.naver.com", "bit.ly", "open.kakao.com", "카톡", "ㅅㅂ"
-# pip install -r requirements.txt
+# pip install -r requirements.txt 설치시
+# pip freeze > requirements.txt 저장시
 
 
 class MyClient(discord.Client):
