@@ -1,7 +1,7 @@
 import discord
 import datetime
 import main_analysis
-from pythonDIR import article_id_get
+from pythonDIR import article_id_get, photo_get
 
 
 def start_embed(color):
@@ -39,3 +39,22 @@ def end_embed(color, driver, word):
     embed.set_footer(text=time)
 
     return embed
+
+
+def photo_embed(color, driver):
+    list = photo_get.photo_get("0", driver)
+    embed_mte = []
+
+    for k in list:
+        embed = discord.Embed(title="베스트포토봇", colour=color)
+        embed.set_author(name="DEVELOID BOT(ALPHA)")
+        embed.add_field(name="**제목**", value=k[0], inline=True)
+        embed.add_field(name="**작성자**", value=k[1], inline=True)
+        embed.add_field(name="**촬영 장소**", value=k[2], inline=True)
+        embed.add_field(name="**링크**", value=k[5], inline=True)
+        embed.add_field(name="**사진**", value=embed.set_image(url=k[3]), inline=False)
+        embed.set_footer(text="게시글 작성 일시: " + k[4])
+        embed_mte.append(embed)
+
+    return embed_mte
+
