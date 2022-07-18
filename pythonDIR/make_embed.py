@@ -46,6 +46,7 @@ def photo_embed(color, driver):
     embed_mte = []
 
     for k in list:
+        embed_d = []
         embed = discord.Embed(title="베스트포토봇", colour=color)
         embed.set_author(name="DEVELOID BOT(ALPHA)")
         embed.add_field(name="**게시글 제목**", value=k[0], inline=True)
@@ -54,9 +55,14 @@ def photo_embed(color, driver):
         embed.add_field(name="**촬영 장소**", value=k[2], inline=True)
         embed.add_field(name="**촬영 시간**", value=k[6], inline=True)
         embed.add_field(name="**링크**", value=k[5], inline=True)
-        embed.add_field(name="**사진**", value=embed.set_image(url=k[3]), inline=False)
+        for x in range(len(k[3])):
+            if x == 0:
+                embed.add_field(name="**대표 사진**", value=embed.set_image(url=k[3][x]), inline=False)
+            else:
+                embed_d.append(k[3][x])
         embed.set_footer(text="게시글 작성 일시: " + k[4])
-        embed_mte.append(embed)
+        embed_d.insert(0, embed)
+        embed_mte.append(embed_d)
 
     return embed_mte
 

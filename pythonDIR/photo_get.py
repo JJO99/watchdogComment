@@ -1,7 +1,6 @@
 import requests
 from pythonDIR import url_return, json_analysis
 from bs4 import BeautifulSoup
-from selenium.webdriver.common.by import By
 
 
 def photo_get(recent_id, driver):
@@ -49,9 +48,9 @@ def photo_get(recent_id, driver):
             if x % 2 == 0:
                 continue
             else:
-                article_image = article_image[x].split('\"')
-                article_image = article_image[2].replace("\\", "")
-                article_image_list.append(article_image)
+                image = article_image[x].split('\"')
+                image = image[2].replace("\\", "")
+                article_image_list.append(image)
 
         article_location = origin_text.split("촬영 장소 ▶")
         article_location = article_location[1].split("</span>")
@@ -68,7 +67,7 @@ def photo_get(recent_id, driver):
             image_title = image_title[1].split("</span>")
             image_title = image_title[0].strip()
 
-        one_article = [article_title, article_author, article_location, article_image, article_date, article_url, image_date, image_title]
+        one_article = [article_title, article_author, article_location, article_image_list, article_date, article_url, image_date, image_title]
 
         photo_list.append(one_article)
 

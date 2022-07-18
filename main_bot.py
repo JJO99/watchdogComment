@@ -42,7 +42,12 @@ class MyClient(discord.Client):
 
         embed3 = make_embed.photo_embed(color, driver)
         for x in embed3:
-            await channel.send(embed=x)
+            await channel.send(embed=x[0])
+            if not len(x) == 1:
+                for y in range(len(x)-1):
+                    await channel.send(x[y+1])
+            else:
+                pass
         print('Finished')
         print(datetime.datetime.now())
 
