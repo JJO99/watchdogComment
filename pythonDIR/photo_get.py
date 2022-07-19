@@ -1,4 +1,4 @@
-import requests
+import requests, datetime
 from pythonDIR import url_return, json_analysis
 from bs4 import BeautifulSoup
 
@@ -67,8 +67,8 @@ def photo_get(recent_id, driver):
             image_title = image_title[1].split("</span>")
             image_title = image_title[0].strip()
 
-        one_article = [article_title, article_author, article_location, article_image_list, article_date, article_url, image_date, image_title]
+        one_article = [article_title, article_author, article_location, article_image_list, article_date, article_url, image_date, image_title, article_id]
 
-        photo_list.append(one_article)
+        photo_list.insert(0, one_article)
 
     return photo_list

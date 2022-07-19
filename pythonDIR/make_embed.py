@@ -41,11 +41,17 @@ def end_embed(color, driver, word):
     return embed
 
 
-def photo_embed(color, driver):
-    list = photo_get.photo_get("0", driver)
+def photo_embed(color, driver, recent_id):
+    list = photo_get.photo_get(recent_id, driver)
     embed_mte = []
+    return_id = recent_id
 
     for k in list:
+        if k[8] <= recent_id:
+            return_id = recent_id
+            continue
+        else:
+            return_id = k[8]
         embed_d = []
         embed = discord.Embed(title="베스트포토봇", colour=color)
         embed.set_author(name="DEVELOID BOT(ALPHA)")
@@ -64,5 +70,5 @@ def photo_embed(color, driver):
         embed_d.insert(0, embed)
         embed_mte.append(embed_d)
 
-    return embed_mte
+    return embed_mte, return_id
 

@@ -25,8 +25,9 @@ class MyClient(discord.Client):
         print('봇 로그인 성공')
         print(datetime.datetime.now())
 
-    @tasks.loop(seconds=600)  # task runs every 60 seconds
+    @tasks.loop(seconds=600)
     async def my_background_task(self):
+        global photo_recent_id
         channel = self.get_channel(personalInfo.chanid())  # channel ID goes here
         color = discord.Color.from_rgb(31, 132, 255)
 
@@ -40,12 +41,14 @@ class MyClient(discord.Client):
         print('Checked')
         print(datetime.datetime.now())
 
-        embed3 = make_embed.photo_embed(color, driver)
+        embed3, recent_id = make_embed.photo_embed(color, driver, photo_recent_id)
+        photo_recent_id = recent_id
+        channel_photo = self.get_channel(personalInfo.chanid_photo())
         for x in embed3:
-            await channel.send(embed=x[0])
+            await channel_photo.send(embed=x[0])
             if not len(x) == 1:
                 for y in range(len(x)-1):
-                    await channel.send(x[y+1])
+                    await channel_photo.send(x[y+1])
             else:
                 pass
         print('Finished')
