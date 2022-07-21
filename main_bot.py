@@ -23,7 +23,14 @@ class MyClient(discord.Client):
 
     async def on_ready(self):
         print('봇 로그인 성공')
-        print(datetime.datetime.now())
+
+    async def bot_status(self, now):
+        if now == 0:
+            await client.change_presence(activity=discord.Game('가만히 숨쉬기'))
+        elif now == 1:
+            await client.change_presence(activity=discord.Game('게시글/댓글 검사'))
+        elif now == 2:
+            await client.change_presence(activity=discord.Game('베스트포토 검사'))
 
     @tasks.loop(seconds=600)
     async def my_background_task(self):
@@ -34,13 +41,14 @@ class MyClient(discord.Client):
         embed1 = make_embed.start_embed(color)
         await channel.send(embed=embed1, delete_after=10)
         print('Checking')
-        print(datetime.datetime.now())
+        await self.bot_status(1)
 
         embed2 = make_embed.end_embed(color, driver, word)
         await channel.send(embed=embed2)
         print('Checked')
         print(datetime.datetime.now())
 
+        await self.bot_status(2)
         embed3, recent_id = make_embed.photo_embed(color, driver, photo_recent_id)
         photo_recent_id = recent_id
         channel_photo = self.get_channel(personalInfo.chanid_photo())
@@ -52,7 +60,7 @@ class MyClient(discord.Client):
             else:
                 pass
         print('Finished')
-        print(datetime.datetime.now())
+        await self.bot_status(0)
 
     @my_background_task.before_loop
     async def before_my_task(self):
