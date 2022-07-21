@@ -4,7 +4,7 @@ import discord
 import datetime
 
 driver = auto_login.login()
-print("Driver Login")
+print("DRIVER LOGIN")
 photo_recent_id = "0"
 
 
@@ -15,10 +15,10 @@ class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.my_background_task.start()
-        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "ㅅㅂ", "카톡"
+        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "ㅅㅂ", "이팀장", "카톡"
 
     async def on_ready(self):
-        print('봇 로그인 성공')
+        print('BOT LOGIN')
 
     async def bot_status(self, now):
         if now == 0:
@@ -37,12 +37,12 @@ class MyClient(discord.Client):
 
         embed1 = make_embed.start_embed(color)
         await channel.send(embed=embed1, delete_after=10)
-        print('Checking')
+        print('CHECK START')
         await self.bot_status(1)
 
-        embed2 = make_embed.end_embed(color, driver, word)
+        embed2 = make_embed.end_embed(color, driver, self.word)
         await channel.send(embed=embed2)
-        print('Checked')
+        print('CHECK FINISH')
 
         await self.bot_status(2)
         embed3, recent_id = make_embed.photo_embed(color, driver, photo_recent_id)
@@ -55,7 +55,7 @@ class MyClient(discord.Client):
                     await channel_photo.send(x[y+1])
             else:
                 pass
-        print('Finished')
+        print('PHOTO FINISH')
         await self.bot_status(0)
 
     @my_background_task.before_loop
