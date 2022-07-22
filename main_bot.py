@@ -42,9 +42,10 @@ class MyClient(discord.Client):
 
         embed2 = make_embed.end_embed(color, driver, self.word)
         await channel.send(embed=embed2)
-        print('CHECK FINISH')
+        print('CHECK FINISHED')
 
         await self.bot_status(2)
+        print('PHOTO START')
         embed3, recent_id = make_embed.photo_embed(color, driver, photo_recent_id)
         photo_recent_id = recent_id
         channel_photo = self.get_channel(personalInfo.chanid_photo())
@@ -55,7 +56,7 @@ class MyClient(discord.Client):
                     await channel_photo.send(x[y+1])
             else:
                 pass
-        print('PHOTO FINISH')
+        print('PHOTO FINISHED')
         await self.bot_status(0)
 
     @my_background_task.before_loop
