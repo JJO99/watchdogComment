@@ -1,7 +1,7 @@
-import requests, datetime
+import requests
 from pythonDIR import url_return, json_analysis
 from bs4 import BeautifulSoup
-
+import time
 
 def photo_get(recent_id, driver):
     url = "https://cafe.naver.com/ArticleList.nhn?search.clubid=23370764&search.menuid=7&search.boardtype=L&userDisplay=15&search.headid=2391"
@@ -22,12 +22,6 @@ def photo_get(recent_id, driver):
         if article_id == recent_id:
             break
 
-        article_date = str(
-            soup.select("#main-area > div:nth-child(4) > table > tbody > tr:nth-child(" + n + ") > td.td_date"))
-        article_date = article_date.split(">")
-        article_date = article_date[1]
-        article_date = article_date.split("<")[0]
-
         article_title = str(soup.select(
             "#main-area > div:nth-child(4) > table > tbody > tr:nth-child(" + n + ") > td.td_article > div.board-list > div > a.article"))
         article_title = article_title.split("</span>")
@@ -41,6 +35,12 @@ def photo_get(recent_id, driver):
 
         json_open = json_analysis.check(driver, article_id, "")
         origin_text = json_open.article()
+
+        origin_unix_time = json_open.wrote_date() / 1000
+        origin_unix_time = origin_unix_time
+        dateset = time.gmtime(origin_unix_time)
+        article_date = str(dateset.tm_year) + "년 " + str(dateset.tm_mon) + "월 " + str(dateset.tm_mday) + "일 " + str(dateset.tm_hour) + ":" + str(dateset.tm_min) + ":" + str(dateset.tm_sec)
+
         article_image = origin_text.split('src')
 
         article_image_list = []

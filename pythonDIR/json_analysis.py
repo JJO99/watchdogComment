@@ -2,6 +2,7 @@ import json
 from pythonDIR import check_content
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 
 class check:
@@ -21,6 +22,7 @@ class check:
         for x in comment_item:
             self.commenttext.append(x['content'])
         self.articletext = self.jsonfile['result']['article']['contentHtml']
+        self.ar_date = self.jsonfile['result']['article']['writeDate']
         self.word = word
 
     def commentcheck(self):
@@ -59,3 +61,6 @@ class check:
 
     def article(self):
         return self.articletext
+    
+    def wrote_date(self):
+        return self.ar_date

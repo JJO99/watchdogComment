@@ -1,12 +1,10 @@
 from discord.ext import tasks
 from pythonDIR import personalInfo, auto_login, make_embed
 import discord
-import datetime
 
+photo_recent_id = "993004"
 driver = auto_login.login()
 print("DRIVER LOGIN")
-photo_recent_id = "0"
-
 
 # pip install -r requirements.txt 설치시, pip freeze > requirements.txt 저장시
 
@@ -15,7 +13,7 @@ class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.my_background_task.start()
-        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "ㅅㅂ", "이팀장", "카톡"
+        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "이팀장", "카톡", "ㅋr톡", "www.macrumors.com"
 
     async def on_ready(self):
         print('BOT LOGIN')
@@ -28,15 +26,15 @@ class MyClient(discord.Client):
         elif now == 2:
             await client.change_presence(activity=discord.Game('베스트포토 검사'))
 
-    @tasks.loop(seconds=600)
+    @tasks.loop(seconds=1800)
     async def my_background_task(self):
         global photo_recent_id
 
         channel = self.get_channel(personalInfo.chanid())  # channel ID goes here
         color = discord.Color.from_rgb(31, 132, 255)
-
+        
         embed1 = make_embed.start_embed(color)
-        await channel.send(embed=embed1, delete_after=10)
+        await channel.send(embed=embed1, delete_after=30)
         print('CHECK START')
         await self.bot_status(1)
 
