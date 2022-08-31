@@ -88,3 +88,4 @@ fabric.properties
 /test.html
 /test.py
 !/pythonDIR/chromedriver
+!/pythonDIR/chromedriver
