@@ -7,9 +7,11 @@ import os
 
 def login():
     # Windows
-    #driver_path = '..\watchdogComment\pythonDIR\chromedriver.exe'
+    # driver_path = '..\watchdogComment\pythonDIR\chromedriver.exe'
     # Ubuntu
-    driver_path = '/usr/local/share/chromedriver'
+    # driver_path = '/usr/local/share/chromedriver'
+    # macOS
+    driver_path = '../watchdogComment/pythonDIR/chromedriver'
 
     naver_id = personalInfo.id()
     naver_pw = personalInfo.pw()
@@ -19,8 +21,7 @@ def login():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--disable-gpu")
-    options.add_argument(
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.108 Safari/537.36")
+    options.add_argument("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70")
     driver = webdriver.Chrome(driver_path, chrome_options=options) # macos: .exe 빼기 / windows: .exe 붙이기
 
     driver.get("https://naver.com")  # 네이버 접속

@@ -1,4 +1,5 @@
 /pythonDIR/personalInfo.py
+/pythonDIR/chromedriver
 list.txt
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -86,3 +87,4 @@ fabric.properties
 /pythonDIR/103/
 /test.html
 /test.py
+!/pythonDIR/chromedriver

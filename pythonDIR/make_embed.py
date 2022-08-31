@@ -3,10 +3,11 @@ from datetime import datetime, timedelta
 import main_analysis
 from pythonDIR import article_id_get, photo_get
 
+version = "DEVELOID BOT(ALPHA) v0.1.2"
 
 def start_embed(color):
     embed = discord.Embed(title="감시봇", colour=color)
-    embed.set_author(name="DEVELOID BOT(ALPHA) v0.1")
+    embed.set_author(name=version)
     embed.add_field(name="**확인 하는 중**", value="약 30초가량 소요됩니다.")
 
     return embed
@@ -17,7 +18,7 @@ def end_embed(color, driver, word):
     now = str(origin_time)
 
     embed = discord.Embed(title="감시봇", colour=color)
-    embed.set_author(name="DEVELOID BOT(ALPHA) v0.1.1")
+    embed.set_author(name=version)
 
     article_id = list(set(article_id_get.recent_article_id_get() + article_id_get.all_article_id_get()))
 
@@ -35,8 +36,8 @@ def end_embed(color, driver, word):
         embed.add_field(name="**확인 결과**", value=url, inline=False)
     else:
         url = "이상 게시글이 없습니다."
-        embed.add_field(name="**확인 결과**", value=url, inline=True)
-        embed.add_field(name="**★★주의★★**", value="아직 베타버전인 관계로 이상이 없다고 뜨더라도 실제 게시글에선 문제가 있을 수 있으니 꼭 모니터링 해주시기 바랍니다.")
+        embed.add_field(name="**확인 결과**", value=url, inline=False)
+        embed.add_field(name="**★★주의★★**", value="아직 알파버전인 관계로 이상이 없다고 뜨더라도 실제 게시글에선 문제가 있을 수 있으니 꼭 모니터링 해주시기 바랍니다.")
 
     time = "기준 시간: " + now
     embed.set_footer(text=time)
@@ -64,7 +65,7 @@ def photo_embed(color, driver, recent_id):
         
         embed_d = []
         embed = discord.Embed(title="베스트포토봇", colour=color)
-        embed.set_author(name="DEVELOID BOT(ALPHA) v0.1")
+        embed.set_author(name=version)
         embed.add_field(name="**게시글 제목**", value=k[0], inline=True)
         embed.add_field(name="**사진 제목**", value=k[7], inline=True)
         embed.add_field(name="**작성자**", value=k[1], inline=True)
