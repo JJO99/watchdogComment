@@ -2,7 +2,7 @@ from discord.ext import tasks
 from pythonDIR import personalInfo, auto_login, make_embed
 import discord
 
-photo_recent_id = "993004"
+photo_recent_id = "993372"
 driver = auto_login.login()
 print("DRIVER LOGIN")
 
@@ -13,7 +13,7 @@ class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.my_background_task.start()
-        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "이팀장", "카톡", "ㅋr톡", "www.macrumors.com"
+        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "이팀장", "카톡", "ㅋr톡", "bltly.link", "vo.la"
 
     async def on_ready(self):
         print('BOT LOGIN')

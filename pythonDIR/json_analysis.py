@@ -41,16 +41,17 @@ class check:
         a = self.articletext
 
         soup = BeautifulSoup(a, 'html.parser')
-        m = soup.get_text()
+        m = soup.get_text() # text만 불러오므로 태그가 포함된 soup 자체를 읽을 필요가 있음
         m = m.replace('\n', '')
-        m = m.split('.')
-        for x in m:
-            x = x.split(' ')
-            n = check_content.checkArticle(x, word)
-            if n == 1:
-                return self.articleid
-            else:
-                return None
+        # m = m.split('.')
+        m = m.split('/')
+        if len(m) > 1:
+            for x in m:
+                for y in word:
+                    if x == y:
+                        return self.articleid
+                    else:
+                        continue
 
     def comment(self):
         result = []

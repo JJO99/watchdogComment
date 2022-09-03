@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import main_analysis
 from pythonDIR import article_id_get, photo_get
 
-version = "DEVELOID BOT(ALPHA) v0.1.2"
+version = "DEVELOID BOT(ALPHA) v0.1.3(20220903)"
 
 def start_embed(color):
     embed = discord.Embed(title="감시봇", colour=color)
