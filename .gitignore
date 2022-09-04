@@ -89,3 +89,4 @@ fabric.properties
 /test.py
 
 /credentials.json
+/token.json
