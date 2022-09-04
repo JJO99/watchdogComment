@@ -6,13 +6,15 @@ photo_recent_id = "993372"
 driver = auto_login.login()
 print("DRIVER LOGIN")
 
+
 # pip install -r requirements.txt 설치시, pip freeze > requirements.txt 저장시
+
 
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.my_background_task.start()
-        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "이팀장", "카톡", "ㅋr톡", "bltly.link", "vo.la"
+        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "bltly.link", "vo.la", "coupa.ng"
 
     async def on_ready(self):
         print('BOT LOGIN')
@@ -31,14 +33,14 @@ class MyClient(discord.Client):
 
         channel = self.get_channel(personalInfo.chanid())  # channel ID goes here
         color = discord.Color.from_rgb(31, 132, 255)
-        
+
         embed1 = make_embed.start_embed(color)
         await channel.send(embed=embed1, delete_after=30)
         print('CHECK START')
         await self.bot_status(1)
 
         embed2 = make_embed.end_embed(color, driver, self.word)
-        await channel.send(embed=embed2)
+        await channel.send(embed=embed2, delete_after=1790)
         print('CHECK FINISHED')
 
         await self.bot_status(2)
@@ -49,8 +51,8 @@ class MyClient(discord.Client):
         for x in embed3:
             await channel_photo.send(embed=x[0])
             if not len(x) == 1:
-                for y in range(len(x)-1):
-                    await channel_photo.send(x[y+1])
+                for y in range(len(x) - 1):
+                    await channel_photo.send(x[y + 1])
             else:
                 pass
         print('PHOTO FINISHED')
