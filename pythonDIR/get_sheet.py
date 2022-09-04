@@ -14,10 +14,11 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = personalInfo.sheet_id()
-SAMPLE_RANGE_NAME = 'Sheet1!A2:A4'
+SAMPLE_RANGE_NAME = 'Sheet1!A2:A30'
 
 
 def main():
+    return_list = []
     creds = None
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
@@ -45,10 +46,11 @@ def main():
             print('No data found.')
             return
 
-        print('금칙어:')
         for row in values:
             # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s' % (row[0]))
+            return_list.extend(row)
+
+        return return_list
     except HttpError as err:
         print(err)
 

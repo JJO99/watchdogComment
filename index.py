@@ -1,5 +1,5 @@
 from discord.ext import tasks
-from pythonDIR import personalInfo, auto_login, make_embed
+from pythonDIR import personalInfo, auto_login, make_embed, get_sheet
 import discord
 
 photo_recent_id = "993372"
@@ -14,7 +14,6 @@ class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.my_background_task.start()
-        self.word = "m.site.naver.com", "bit.ly", "open.kakao.com", "bltly.link", "vo.la", "coupa.ng"
 
     async def on_ready(self):
         print('BOT LOGIN')
@@ -31,6 +30,8 @@ class MyClient(discord.Client):
     async def my_background_task(self):
         global photo_recent_id
 
+        word = get_sheet.main()
+
         channel = self.get_channel(personalInfo.chanid())  # channel ID goes here
         color = discord.Color.from_rgb(31, 132, 255)
 
@@ -39,7 +40,7 @@ class MyClient(discord.Client):
         print('CHECK START')
         await self.bot_status(1)
 
-        embed2 = make_embed.end_embed(color, driver, self.word)
+        embed2 = make_embed.end_embed(color, driver, word)
         await channel.send(embed=embed2, delete_after=1790)
         print('CHECK FINISHED')
 
