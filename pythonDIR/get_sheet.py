@@ -47,7 +47,8 @@ def main():
             return
 
         for row in values:
-            # Print columns A and E, which correspond to indices 0 and 4.
+            if row == "":
+                break
             return_list.extend(row)
 
         return return_list
