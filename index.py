@@ -8,7 +8,6 @@ print("DRIVER LOGIN")
 
 # pip install -r requirements.txt 설치시, pip freeze > requirements.txt 저장시
 
-
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

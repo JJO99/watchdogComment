@@ -87,5 +87,5 @@ fabric.properties
 /pythonDIR/103/
 /test.html
 /test.py
-!/pythonDIR/chromedriver
-!/pythonDIR/chromedriver
+
+/credentials.json
