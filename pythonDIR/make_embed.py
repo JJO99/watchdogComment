@@ -3,13 +3,13 @@ from datetime import datetime, timedelta
 import main_analysis
 from pythonDIR import article_id_get, photo_get
 
-version = "DEVELOID BOT v0.1.4(20220904)"
+version = "DEVELOID BOT v0.1.6(20220907)"
 
 
 def start_embed(color):
     origin_time = datetime.utcnow() + timedelta(hours=9)
     now = str(origin_time)
-
+    
     embed = discord.Embed(title="감시봇", colour=color)
     embed.set_author(name=version)
     embed.add_field(name="**확인 하는 중**", value="최대 30초가량 소요됩니다.")
@@ -20,9 +20,6 @@ def start_embed(color):
 
 
 def end_embed(color, driver, word):
-    origin_time = datetime.utcnow() + timedelta(hours=9)
-    now = str(origin_time)
-
     embed = discord.Embed(title="감시봇", colour=color)
     embed.set_author(name=version)
 
@@ -45,6 +42,9 @@ def end_embed(color, driver, word):
         embed.add_field(name="**확인 결과**", value=url, inline=False)
         embed.add_field(name="**★★주의★★**", value="실제 게시글에선 문제가 있을 수 있으니 꼭 모니터링 해주시기 바랍니다.")
 
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    
     time = "기준 시간: " + now
     embed.set_footer(text=time)
 
@@ -62,13 +62,13 @@ def photo_embed(color, driver, recent_id):
             continue
         else:
             return_id = k[8]
-
+        
         for x in range(len(k)):
             if k[x] == "":
                 k[x] = "(양식에 맞게 작성되지 않음)"
             else:
                 continue
-
+        
         embed_d = []
         embed = discord.Embed(title="베스트포토봇", colour=color)
         embed.set_author(name=version)

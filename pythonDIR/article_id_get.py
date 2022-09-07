@@ -46,7 +46,10 @@ def all_article_id_get():
         x = str(x)
         check = str(soup.select('#main-area>div:nth-child(4)>table>tbody>tr:nth-child(' + x + ')>td.td_article>div.board-list>div>a.article'))
         check = check.split("articleid=")
-        check = check[1].split("&amp")
+        if len(check) == 1:  #게시글에 답글 형태로 글이 달리면 발생하는 오류를 해결하기 위한 임시방편 (해당 답글의 articleid를 무시합니다)
+            continue
+        else:
+            check = check[1].split("&amp")
         article_id.append(check[0])
 
     return article_id
