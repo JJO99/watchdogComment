@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import main_analysis
 from pythonDIR import article_id_get, photo_get
 
-version = "DEVELOID BOT v0.1.6(20220907)"
+version = "DEVELOID BOT v0.1.7(20220907_2)"
 
 
 def start_embed(color):
