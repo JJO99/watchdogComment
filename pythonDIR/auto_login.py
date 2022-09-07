@@ -1,17 +1,12 @@
 from selenium import webdriver
 from pythonDIR import personalInfo
 from selenium.webdriver.common.by import By
-import chromedriver_autoinstaller as driverupdate
-import os
+import platform
+import session
 
 
 def login():
-    # Windows
-    # driver_path = '..\watchdogComment\pythonDIR\chromedriver.exe'
-    # Ubuntu
-    # driver_path = '/usr/local/share/chromedriver'
-    # macOS
-    driver_path = '../watchdogComment/pythonDIR/chromedriver'
+    driver_path = session.chrome_path(str(platform.system()))
 
     naver_id = personalInfo.id()
     naver_pw = personalInfo.pw()
