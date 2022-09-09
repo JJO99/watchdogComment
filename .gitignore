@@ -90,3 +90,5 @@ fabric.properties
 
 /credentials.json
 /token.json
+/.idea/sqldialects.xml
+/.idea/dataSources.xml
