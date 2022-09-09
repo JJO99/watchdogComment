@@ -1,9 +1,10 @@
 import discord
 from datetime import datetime, timedelta
 import main_analysis
-from pythonDIR import article_id_get, photo_get
+from pythonDIR import photo_get, personalInfo
 
-version = "DEVELOID BOT v0.1.7(20220907_2)"
+
+version = "DEVELOID BOT v0.2.0(20220909)"
 
 
 def start_embed(color):
@@ -11,6 +12,7 @@ def start_embed(color):
     now = str(origin_time)
     
     embed = discord.Embed(title="감시봇", colour=color)
+    embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/976062969492430868/f67ab97968291c95d3648cd9e96a47bc.png")
     embed.set_author(name=version)
     embed.add_field(name="**확인 하는 중**", value="최대 30초가량 소요됩니다.")
     time = "기준 시간: " + now
@@ -21,6 +23,7 @@ def start_embed(color):
 
 def end_embed(color, driver, word, article_id):
     embed = discord.Embed(title="감시봇", colour=color)
+    embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/976062969492430868/f67ab97968291c95d3648cd9e96a47bc.png")
     embed.set_author(name=version)
 
     url_list = []
@@ -87,3 +90,24 @@ def photo_embed(color, driver, recent_id):
 
     return embed_mte, return_id
 
+
+def return_sql_data():
+    embed = "0"
+    return embed
+
+def getup():
+    embed = "0"
+    return embed
+
+def count_embed(color, count):
+    embed = discord.Embed(title="감시봇", colour=color)
+    embed.set_author(name=version)
+    embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/976062969492430868/f67ab97968291c95d3648cd9e96a47bc.png")
+    embed.add_field(name="작업이 완료되었습니다.", value="마지막 시동 이후 " + str(count) + "번째 작업이 완료되었습니다.", inline=False)
+    embed.add_field(name="호출하기", value=personalInfo.discord_ninano())
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    time = "기준 시간: " + now
+    embed.set_footer(text=time)
+
+    return embed

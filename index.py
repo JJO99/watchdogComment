@@ -6,7 +6,7 @@ import main_analysis
 photo_recent_id = "993372"
 driver = auto_login.login()
 print("DRIVER LOGIN")
-
+loop_count = 0
 
 # pip install -r requirements.txt 설치시, pip freeze > requirements.txt 저장시
 
@@ -26,9 +26,16 @@ class MyClient(discord.Client):
             await client.change_presence(activity=discord.Game('게시글/댓글 검사'))
         elif now == 2:
             await client.change_presence(activity=discord.Game('베스트포토 검사'))
+        elif now == 3:
+            await client.change_presence(activity=discord.Game('댓글을 저장'))
+        elif now == 4:
+            await client.change_presence(activity=discord.Game('게시글을 저장'))
 
     @tasks.loop(seconds=1800)
     async def my_background_task(self):
+        global loop_count
+        loop_count = loop_count + 1
+
         global photo_recent_id
 
         word = get_sheet.main()
@@ -44,7 +51,7 @@ class MyClient(discord.Client):
         article_id = list(set(article_id_get.recent_article_id_get() + article_id_get.all_article_id_get()))
 
         embed2 = make_embed.end_embed(color, driver, word, article_id)
-        await channel.send(embed=embed2, delete_after=1790)
+        await channel.send(embed=embed2, delete_after=1730)
         print('CHECK FINISHED')
 
         await self.bot_status(2)
@@ -60,20 +67,33 @@ class MyClient(discord.Client):
             else:
                 pass
         print('PHOTO FINISHED')
-        await self.bot_status(0)
 
-        #  save comment
+        #  save comment, article
+        await self.bot_status(3)
+        print('SAVE COMMENT')
         for x in article_id:
             temp = main_analysis.Analyse(driver, x, word)
-            list_file = temp.for_sql()
+            list_file = temp.comment_sql_Data()
+
             for y in list_file:
-                cid = temp.cid()
-                rid = temp.rid()
-                go_to_sql.insert(x, y[0], y[1], cid, rid, y[2])
+                go_to_sql.comment_insert(x, y[0], y[1], y[3], y[4], y[2])
+
+        await self.bot_status(4)
+        print('SAVE ARTICLE')
+        for x in article_id:
+            temp = main_analysis.Analyse(driver, x, word)
+            y = temp.article_sql_Data()
+            go_to_sql.article_insert(x, y[0][0], y[1], y[2], y[3])
+
+        print(loop_count, "번째 루프 작업이 정상적으로 완료되었습니다.")
+        embed4 = make_embed.count_embed(color, loop_count)
+        await channel.send(embed=embed4, delete_after=120)
+        await self.bot_status(0)
+
 
     @my_background_task.before_loop
     async def before_my_task(self):
-        await self.wait_until_ready()  # wait until the bot logs in
+        await self.wait_until_ready()
 
 
 client = MyClient()
