@@ -92,3 +92,4 @@ fabric.properties
 /token.json
 /.idea/sqldialects.xml
 /.idea/dataSources.xml
+/test.json
