@@ -19,11 +19,9 @@ def start_embed(color):
     return embed
 
 
-def end_embed(color, driver, word):
+def end_embed(color, driver, word, article_id):
     embed = discord.Embed(title="감시봇", colour=color)
     embed.set_author(name=version)
-
-    article_id = list(set(article_id_get.recent_article_id_get() + article_id_get.all_article_id_get()))
 
     url_list = []
     for x in article_id:

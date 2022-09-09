@@ -11,8 +11,8 @@ def chrome_path(os):
 
 def os_id(os):
     if os == "Darwin":
-        return '1'
+        return 1
     elif os == "Linux":
-        return '2'
+        return 2
     elif os == "Windows":
-        return '3'
+        return 3

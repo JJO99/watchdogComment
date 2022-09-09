@@ -1,6 +1,7 @@
 from discord.ext import tasks
-from pythonDIR import personalInfo, auto_login, make_embed, get_sheet
+from pythonDIR import personalInfo, auto_login, make_embed, get_sheet, article_id_get, go_to_sql
 import discord
+import main_analysis
 
 photo_recent_id = "993372"
 driver = auto_login.login()
@@ -40,7 +41,9 @@ class MyClient(discord.Client):
         print('CHECK START')
         await self.bot_status(1)
 
-        embed2 = make_embed.end_embed(color, driver, word)
+        article_id = list(set(article_id_get.recent_article_id_get() + article_id_get.all_article_id_get()))
+
+        embed2 = make_embed.end_embed(color, driver, word, article_id)
         await channel.send(embed=embed2, delete_after=1790)
         print('CHECK FINISHED')
 
@@ -58,6 +61,15 @@ class MyClient(discord.Client):
                 pass
         print('PHOTO FINISHED')
         await self.bot_status(0)
+
+        #  save comment
+        for x in article_id:
+            temp = main_analysis.Analyse(driver, x, word)
+            list_file = temp.for_sql()
+            for y in list_file:
+                cid = temp.cid()
+                rid = temp.rid()
+                go_to_sql.insert(x, y[0], y[1], cid, rid, y[2])
 
     @my_background_task.before_loop
     async def before_my_task(self):

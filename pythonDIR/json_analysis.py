@@ -18,11 +18,29 @@ class check:
         self.jsonfile = cr
 
         self.commenttext = []
+        self.comment_writer_date =[]
         comment_item = self.jsonfile['result']['comments']['items']
         for x in comment_item:
-            self.commenttext.append(x['content'])
+            content = x['content']
+            writer = x['writer']['id']
+            comment_id = x['id']
+            comment_ref_id = x['refId']
+
+            comment_date = int(x['updateDate'])
+            comment_date = comment_date / 1000
+            comment_date = datetime.fromtimestamp(comment_date).strftime('%Y-%m-%d %H:%M:%S')
+
+            self.commenttext.append(content)
+
+
+            mkl = [content, writer, commet_date, comment_id, comment_ref_id]
+
+            self.sql_Data.append(mkl)
+
         self.articletext = self.jsonfile['result']['article']['contentHtml']
+
         self.ar_date = self.jsonfile['result']['article']['writeDate']
+
         self.word = word
 
     def commentcheck(self):
@@ -65,3 +83,6 @@ class check:
     
     def wrote_date(self):
         return self.ar_date
+
+    def for_sql(self):
+        return self.comment_writer_date
