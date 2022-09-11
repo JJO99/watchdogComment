@@ -1,6 +1,8 @@
 from discord.ext import tasks
 from pythonDIR import personalInfo, auto_login, make_embed, get_sheet, article_id_get, go_to_sql
 import discord
+from discord import app_commands
+from discord.ext import commands
 import main_analysis
 
 photo_recent_id = "993372"
@@ -14,6 +16,9 @@ loop_count = 0
 class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    async def setup_hook(self) -> None:
+        # start the task to run in the background
         self.my_background_task.start()
 
     async def on_ready(self):
@@ -96,5 +101,5 @@ class MyClient(discord.Client):
         await self.wait_until_ready()
 
 
-client = MyClient()
+client = MyClient(intents=discord.Intents.default())
 client.run(personalInfo.token())
