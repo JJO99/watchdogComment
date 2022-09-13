@@ -1,8 +1,7 @@
 from discord.ext import tasks
+
 from pythonDIR import personalInfo, auto_login, make_embed, get_sheet, article_id_get, go_to_sql
 import discord
-from discord import app_commands
-from discord.ext import commands
 import main_analysis
 
 photo_recent_id = "993372"
@@ -46,22 +45,21 @@ class MyClient(discord.Client):
         word = get_sheet.main()
 
         channel = self.get_channel(personalInfo.chanid())  # channel ID goes here
-        color = discord.Color.from_rgb(31, 132, 255)
 
-        embed1 = make_embed.start_embed(color)
+        embed1 = make_embed.start_embed()
         await channel.send(embed=embed1, delete_after=30)
         print('CHECK START')
         await self.bot_status(1)
 
         article_id = list(set(article_id_get.recent_article_id_get() + article_id_get.all_article_id_get()))
 
-        embed2 = make_embed.end_embed(color, driver, word, article_id)
+        embed2 = make_embed.end_embed(driver, word, article_id)
         await channel.send(embed=embed2, delete_after=1730)
         print('CHECK FINISHED')
 
         await self.bot_status(2)
         print('PHOTO START')
-        embed3, recent_id = make_embed.photo_embed(color, driver, photo_recent_id)
+        embed3, recent_id = make_embed.photo_embed(driver, photo_recent_id)
         photo_recent_id = recent_id
         channel_photo = self.get_channel(personalInfo.chanid_photo())
         for x in embed3:
@@ -92,7 +90,7 @@ class MyClient(discord.Client):
 
         print(loop_count, "번째 루프 작업이 정상적으로 완료되었습니다.")
         embed4 = make_embed.count_embed(color, loop_count)
-        await channel.send(embed=embed4, delete_after=120)
+        await channel.send(embed=embed4, delete_after=600)
         await self.bot_status(0)
 
 
@@ -101,5 +99,6 @@ class MyClient(discord.Client):
         await self.wait_until_ready()
 
 
-client = MyClient(intents=discord.Intents.default())
+intents = discord.Intents.default()
+client = MyClient(intents=intents)
 client.run(personalInfo.token())

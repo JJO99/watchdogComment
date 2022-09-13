@@ -110,4 +110,3 @@ class check:
         origin_article_sql_data = [article_only_text, writer, wrote, count]
 
         return origin_article_sql_data
-# article_id, article, writer, wrote, count

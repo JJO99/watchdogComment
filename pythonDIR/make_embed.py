@@ -4,15 +4,17 @@ import main_analysis
 from pythonDIR import photo_get, personalInfo
 
 
-version = "DEVELOID BOT v0.2.0(20220909)"
+version = "DEVELOID BOT v0.2.1(20220913)"
+thumbnail_url_devel = personalInfo.devel_logo()
+thumbnail_url_recycle = personalInfo.recycle_logo()
+color = discord.Color.from_rgb(31, 132, 255)
 
-
-def start_embed(color):
+def start_embed():
     origin_time = datetime.utcnow() + timedelta(hours=9)
     now = str(origin_time)
     
     embed = discord.Embed(title="감시봇", colour=color)
-    embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/976062969492430868/f67ab97968291c95d3648cd9e96a47bc.png")
+    embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.set_author(name=version)
     embed.add_field(name="**확인 하는 중**", value="최대 30초가량 소요됩니다.")
     time = "기준 시간: " + now
@@ -21,9 +23,9 @@ def start_embed(color):
     return embed
 
 
-def end_embed(color, driver, word, article_id):
+def end_embed(driver, word, article_id):
     embed = discord.Embed(title="감시봇", colour=color)
-    embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/976062969492430868/f67ab97968291c95d3648cd9e96a47bc.png")
+    embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.set_author(name=version)
 
     url_list = []
@@ -52,7 +54,7 @@ def end_embed(color, driver, word, article_id):
     return embed
 
 
-def photo_embed(color, driver, recent_id):
+def photo_embed(driver, recent_id):
     get_list = photo_get.photo_get(recent_id, driver)
     embed_mte = []
     return_id = recent_id
@@ -71,7 +73,7 @@ def photo_embed(color, driver, recent_id):
                 continue
         
         embed_d = []
-        embed = discord.Embed(title="베스트포토봇", colour=color)
+        embed = discord.Embed(title="베스트포토 긁어오기", colour=color)
         embed.set_author(name=version)
         embed.add_field(name="**게시글 제목**", value=k[0], inline=True)
         embed.add_field(name="**사진 제목**", value=k[7], inline=True)
@@ -91,18 +93,10 @@ def photo_embed(color, driver, recent_id):
     return embed_mte, return_id
 
 
-def return_sql_data():
-    embed = "0"
-    return embed
-
-def getup():
-    embed = "0"
-    return embed
-
-def count_embed(color, count):
+def count_embed(count):
     embed = discord.Embed(title="감시봇", colour=color)
     embed.set_author(name=version)
-    embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/976062969492430868/f67ab97968291c95d3648cd9e96a47bc.png")
+    embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.add_field(name="작업이 완료되었습니다.", value="마지막 시동 이후 " + str(count) + "번째 작업이 완료되었습니다.", inline=False)
     embed.add_field(name="호출하기", value=personalInfo.discord_ninano())
     origin_time = datetime.utcnow() + timedelta(hours=9)

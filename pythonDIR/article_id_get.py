@@ -38,7 +38,7 @@ def recent_article_id_get ():
 def all_article_id_get():
     # 최근 올라온 게시글 40개에 대해서 articleid를 파싱합니다.
     article_id = []
-    url = 'https://cafe.naver.com/ArticleList.nhn?search.clubid=23370764&search.boardtype=L&search.menuid=&search.marketBoardTab=D&search.specialmenutype=&userDisplay=40'
+    url = 'https://cafe.naver.com/ArticleList.nhn?search.clubid=23370764&search.boardtype=L&search.menuid=&search.marketBoardTab=D&search.specialmenutype=&userDisplay=50'
     r = requests.get(url)
     html = r.text
     soup = BeautifulSoup(html, 'html.parser')
