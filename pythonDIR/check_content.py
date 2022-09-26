@@ -5,7 +5,7 @@ def checkComment(comment, word):
     y = y.split(' ')
 
     for i in y:
-        i = i.split('/')
+        i = i
         for j in i:
             if j in word:
                 c = 1
