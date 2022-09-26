@@ -89,7 +89,7 @@ class MyClient(discord.Client):
             go_to_sql.article_insert(x, y[0][0], y[1], y[2], y[3])
 
         print(loop_count, "번째 루프 작업이 정상적으로 완료되었습니다.")
-        embed4 = make_embed.count_embed(color, loop_count)
+        embed4 = make_embed.count_embed(loop_count)
         await channel.send(embed=embed4, delete_after=600)
         await self.bot_status(0)
 
