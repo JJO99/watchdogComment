@@ -19,6 +19,9 @@ class check:
         self.jsonfile = cr
 
         self.commenttext = []
+        comment_item = self.jsonfile['result']['comments']['items']
+        for x in comment_item:
+            self.commenttext.append(x['content'])
 
         self.article_count = self.jsonfile['result']['article']['readCount']
 
@@ -95,9 +98,8 @@ class check:
         a = self.articletext
         soup = BeautifulSoup(a, 'html.parser')
         m = soup.get_text() # text만 불러오므로 태그가 포함된 soup 자체를 읽을 필요가 있음
-        m = m.replace('\n', '')
-        # m = m.split('.')
-        article_only_text = m.split('/')
+        article_only_text = m.replace('\n', ' ')
+        article_only_text = article_only_text.strip()
 
         writer = self.jsonfile['result']['article']['writer']['id']
 
@@ -107,6 +109,8 @@ class check:
 
         count = self.article_count
 
-        origin_article_sql_data = [article_only_text, writer, wrote, count]
+        raw = self.articletext
+
+        origin_article_sql_data = [article_only_text, raw, writer, wrote, count]
 
         return origin_article_sql_data
