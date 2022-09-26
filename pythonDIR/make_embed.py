@@ -4,7 +4,7 @@ import main_analysis
 from pythonDIR import photo_get, personalInfo
 
 
-version = "DEVELOID BOT v0.2.1(20220913)"
+version = "DEVELOID BOT v0.3.0(20220926)"
 thumbnail_url_devel = personalInfo.devel_logo()
 thumbnail_url_recycle = personalInfo.recycle_logo()
 color = discord.Color.from_rgb(31, 132, 255)
@@ -99,6 +99,93 @@ def count_embed(count):
     embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.add_field(name="작업이 완료되었습니다.", value="마지막 시동 이후 " + str(count) + "번째 작업이 완료되었습니다.", inline=False)
     embed.add_field(name="호출하기", value=personalInfo.discord_ninano())
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    time = "기준 시간: " + now
+    embed.set_footer(text=time)
+
+    return embed
+
+
+def sql_ready_embed():
+    embed = discord.Embed(title="감시봇", colour=color)
+    embed.set_author(name=version)
+    embed.set_thumbnail(url=thumbnail_url_recycle)
+    embed.add_field(name="SQL 저장 중입니다.", value="게시글과 댓글을 서버에 저장합니다.", inline=False)
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    time = "기준 시간: " + now
+    embed.set_footer(text=time)
+
+    return embed
+
+
+def sql_finish_embed():
+    embed = discord.Embed(title="감시봇", colour=color)
+    embed.set_author(name=version)
+    embed.set_thumbnail(url=thumbnail_url_recycle)
+    embed.add_field(name="SQL 저장을 끝냈습니다.", value="게시글과 댓글을 서버에 저장했습니다.", inline=False)
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    time = "기준 시간: " + now
+    embed.set_footer(text=time)
+
+    return embed
+
+
+def sql_search_start():
+    embed = discord.Embed(title='감시봇', colour=color)
+    embed.set_author(name=version)
+    embed.set_thumbnail(url=thumbnail_url_recycle)
+    embed.add_field(name="SQL에 저장된 데이터 감시", value="사전에 저장한 금칙어가 포함된 게시글/댓글이 있는지 검사합니다.", inline=False)
+
+
+def sql_article_good():
+    embed = discord.Embed(title='감시봇', colour=color)
+    embed.set_author(name=version)
+    embed.set_thumbnail(url=thumbnail_url_recycle)
+    embed.add_field(name="SQL에 저장된 데이터 감시 결과", value="게시글에 이상이 없습니다.", inline=False)
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    time = "기준 시간: " + now
+    embed.set_footer(text=time)
+
+    return embed
+
+
+def sql_comment_good():
+    embed = discord.Embed(title='감시봇', colour=color)
+    embed.set_author(name=version)
+    embed.set_thumbnail(url=thumbnail_url_recycle)
+    embed.add_field(name="SQL에 저장된 데이터 감시 결과", value="댓글에 이상이 없습니다.", inline=False)
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    time = "기준 시간: " + now
+    embed.set_footer(text=time)
+
+    return embed
+
+
+def sql_article_bad():
+    embed = discord.Embed(title='감시봇', colour=color)
+    embed.set_author(name=version)
+    embed.set_thumbnail(url=thumbnail_url_recycle)
+    embed.add_field(name="SQL에 저장된 데이터 감시 결과", value="금칙어가 포함된 것으로 보이는 게시글이 있습니다.", inline=False)
+    embed.add_field(name="게시글 번호", value="test", inline=False)
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    time = "기준 시간: " + now
+    embed.set_footer(text=time)
+
+    return embed
+
+
+def sql_comment_bad():
+    embed = discord.Embed(title='감시봇', colour=color)
+    embed.set_author(name=version)
+    embed.set_thumbnail(url=thumbnail_url_recycle)
+    embed.add_field(name="SQL에 저장된 데이터 감시 결과", value="금칙어가 포함된 것으로 보이는 댓글이 있습니다.", inline=False)
+    embed.add_field(name="게시글 번호", value="test", inline=False)
     origin_time = datetime.utcnow() + timedelta(hours=9)
     now = str(origin_time)
     time = "기준 시간: " + now
