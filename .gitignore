@@ -94,5 +94,9 @@ fabric.properties
 /.idea/sqldialects.xml
 /.idea/dataSources.xml
 /test.json
-/pythonDIR/ssh-key-2022-09-10 (1).key
 /pythonDIR/go_to_sql.py
+/pythonDIR/ssh-key-2022-10-08.key
+/sql_control.py
+
+/pythonDIR/chromedriver.exe
+/botserver.key

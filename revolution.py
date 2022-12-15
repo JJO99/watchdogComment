@@ -1,12 +1,14 @@
-from discord.ext import tasks
+
 from pythonDIR import personalInfo, auto_login, make_embed, get_sheet, article_id_get
 import discord
 import main_analysis, sql_control
+import asyncio
 
-photo_recent_id = "994589"
+photo_recent_id = "994563"
 driver = auto_login.login()
 print("DRIVER LOGIN")
 loop_count = 0
+# TODO: 스크랩 게시글의 글과 댓글을 불러오게 작업하기.
 
 
 class MyClient(discord.Client):
@@ -14,7 +16,7 @@ class MyClient(discord.Client):
         super().__init__(*args, **kwargs)
 
     async def setup_hook(self) -> None:
-        self.my_background_task.start()
+        self.bg_task = self.loop.create_task(self.my_background_task())
 
     async def on_ready(self):
         print('BOT LOGIN')
@@ -31,8 +33,8 @@ class MyClient(discord.Client):
         elif now == 4:
             await client.change_presence(activity=discord.Game('베스트포토 긁어오기'))
 
-    @tasks.loop(seconds=1800)
     async def my_background_task(self):
+        await self.wait_until_ready()
         # ------------------------------------------------------------------------------------------ #
         # 1. 루프 카운트, 최근 베스트포토 게시글 번호 글로벌로 호출. 금칙어를 시트에서 불러옴. 표시할 채널을 가져옴.
         global loop_count
@@ -40,9 +42,10 @@ class MyClient(discord.Client):
         global photo_recent_id
         word = get_sheet.main()
         channel = self.get_channel(personalInfo.chanid())
-        log_channel = self.get_channel(797830828415254528)
+        log_channel = self.get_channel(personalInfo.log_chanid())
+        print('SETUP READY')
         # ------------------------------------------------------------------------------------------ #
-        # 2. article ID를 가져오고, MySQL 서버에 저장
+        # 2. article ID를 가져오고, 크롤링하고, MySQL 서버에 저장
         await self.bot_status(1)
         embed1 = make_embed.sql_ready_embed()
         await log_channel.send(embed=embed1)
@@ -68,9 +71,13 @@ class MyClient(discord.Client):
         # ------------------------------------------------------------------------------------------ #
         # 3. 게시글의 금칙어 위반 여부를 검사하고 결과를 표시함.
         await self.bot_status(2)
+        embeda = make_embed.sql_search_start()
+        await channel.send(embed=embeda)
+
         result1 = sql_control.search_sql_article(word)
         if result1 is None:
-            print("게시글에서 위반 내용이 확인되지 않음.")
+            embed3 = make_embed.sql_article_good()
+            await channel.send(embed=embed3)
         else:
             for x in result1:
                 print(x)
@@ -79,12 +86,13 @@ class MyClient(discord.Client):
         await self.bot_status(3)
         result2 = sql_control.search_sql_comment(word)
         if result2 is None:
-            print("댓글에서 위반 내용이 확인되지 않음.")
+            embed4 = make_embed.sql_comment_good()
+            await channel.send(embed=embed4)
         else:
             for x in result2:
                 print(x)
         # ------------------------------------------------------------------------------------------ #
-        # 5. 베스트포토의 게시글을 가져오고 표시함.
+        # 5. 베스트포토의 게시글을 가져오고 결과를 표시함.
         await self.bot_status(4)
         print('PHOTO START')
         embed3, recent_id = make_embed.photo_embed(driver, photo_recent_id)
@@ -105,9 +113,8 @@ class MyClient(discord.Client):
         await channel.send(embed=embed4, delete_after=600)
         await self.bot_status(0)
 
-    @my_background_task.before_loop
-    async def before_my_task(self):
-        await self.wait_until_ready()
+        while not self.is_closed():
+            await asyncio.sleep(1800)
 
 
 intents = discord.Intents.default()
