@@ -21,6 +21,7 @@ def login():
 
     driver.get("https://naver.com")  # 네이버 접속
     driver.implicitly_wait(3)
+    element = driver.find_element(By.XPATH, '//*[@id="account"]/a')
     driver.find_element(By.XPATH, '//*[@id="account"]/a').click()
 
     driver.execute_script("document.getElementsByName('id')[0].value=\'" + naver_id + "\'")

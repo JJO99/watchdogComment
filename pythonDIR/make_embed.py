@@ -4,16 +4,17 @@ import main_analysis
 from pythonDIR import photo_get, personalInfo
 
 
-version = "DEVELOID BOT v0.3.0(20220926)"
+version = "DEVELOID BOT v0.6.0(20221215)"
 thumbnail_url_devel = personalInfo.devel_logo()
 thumbnail_url_recycle = personalInfo.recycle_logo()
 color = discord.Color.from_rgb(31, 132, 255)
+
 
 def start_embed():
     origin_time = datetime.utcnow() + timedelta(hours=9)
     now = str(origin_time)
     
-    embed = discord.Embed(title="감시봇", colour=color)
+    embed = discord.Embed(title="ROBOT", colour=color)
     embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.set_author(name=version)
     embed.add_field(name="**확인 하는 중**", value="최대 30초가량 소요됩니다.")
@@ -24,7 +25,7 @@ def start_embed():
 
 
 def end_embed(driver, word, article_id):
-    embed = discord.Embed(title="감시봇", colour=color)
+    embed = discord.Embed(title="ROBOT", colour=color)
     embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.set_author(name=version)
 
@@ -94,7 +95,7 @@ def photo_embed(driver, recent_id):
 
 
 def count_embed(count):
-    embed = discord.Embed(title="감시봇", colour=color)
+    embed = discord.Embed(title="ROBOT", colour=color)
     embed.set_author(name=version)
     embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.add_field(name="작업이 완료되었습니다.", value="마지막 시동 이후 " + str(count) + "번째 작업이 완료되었습니다.", inline=False)
@@ -108,7 +109,7 @@ def count_embed(count):
 
 
 def sql_ready_embed():
-    embed = discord.Embed(title="감시봇", colour=color)
+    embed = discord.Embed(title="ROBOT", colour=color)
     embed.set_author(name=version)
     embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.add_field(name="SQL 저장 중입니다.", value="게시글과 댓글을 서버에 저장합니다.", inline=False)
@@ -121,7 +122,7 @@ def sql_ready_embed():
 
 
 def sql_finish_embed():
-    embed = discord.Embed(title="감시봇", colour=color)
+    embed = discord.Embed(title="ROBOT", colour=color)
     embed.set_author(name=version)
     embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.add_field(name="SQL 저장을 끝냈습니다.", value="게시글과 댓글을 서버에 저장했습니다.", inline=False)
@@ -134,17 +135,23 @@ def sql_finish_embed():
 
 
 def sql_search_start():
-    embed = discord.Embed(title='감시봇', colour=color)
+    embed = discord.Embed(title='ROBOT', colour=color)
     embed.set_author(name=version)
     embed.set_thumbnail(url=thumbnail_url_recycle)
     embed.add_field(name="SQL에 저장된 데이터 감시", value="사전에 저장한 금칙어가 포함된 게시글/댓글이 있는지 검사합니다.", inline=False)
+    origin_time = datetime.utcnow() + timedelta(hours=9)
+    now = str(origin_time)
+    time = "기준 시간: " + now
+    embed.set_footer(text=time)
+
+    return embed
 
 
 def sql_article_good():
-    embed = discord.Embed(title='감시봇', colour=color)
+    embed = discord.Embed(title='ROBOT', colour=color)
     embed.set_author(name=version)
     embed.set_thumbnail(url=thumbnail_url_recycle)
-    embed.add_field(name="SQL에 저장된 데이터 감시 결과", value="게시글에 이상이 없습니다.", inline=False)
+    embed.add_field(name="SQL에 저장된 댓글 데이터 검사 결과", value="게시글에 이상이 없습니다.", inline=False)
     origin_time = datetime.utcnow() + timedelta(hours=9)
     now = str(origin_time)
     time = "기준 시간: " + now
@@ -154,10 +161,10 @@ def sql_article_good():
 
 
 def sql_comment_good():
-    embed = discord.Embed(title='감시봇', colour=color)
+    embed = discord.Embed(title='ROBOT', colour=color)
     embed.set_author(name=version)
     embed.set_thumbnail(url=thumbnail_url_recycle)
-    embed.add_field(name="SQL에 저장된 데이터 감시 결과", value="댓글에 이상이 없습니다.", inline=False)
+    embed.add_field(name="SQL에 저장된 댓글 데이터 검사 결과", value="댓글에 이상이 없습니다.", inline=False)
     origin_time = datetime.utcnow() + timedelta(hours=9)
     now = str(origin_time)
     time = "기준 시간: " + now
@@ -167,11 +174,11 @@ def sql_comment_good():
 
 
 def sql_article_bad():
-    embed = discord.Embed(title='감시봇', colour=color)
+    embed = discord.Embed(title='ROBOT', colour=color)
     embed.set_author(name=version)
     embed.set_thumbnail(url=thumbnail_url_recycle)
-    embed.add_field(name="SQL에 저장된 데이터 감시 결과", value="금칙어가 포함된 것으로 보이는 게시글이 있습니다.", inline=False)
-    embed.add_field(name="게시글 번호", value="test", inline=False)
+    embed.add_field(name="SQL에 저장된 게시글 데이터 검사 결과", value="금칙어가 포함된 것으로 보이는 게시글이 있습니다.", inline=False)
+    embed.add_field(name="게시글 번호", value="카페를 참고하세요", inline=False)
     origin_time = datetime.utcnow() + timedelta(hours=9)
     now = str(origin_time)
     time = "기준 시간: " + now
@@ -181,11 +188,11 @@ def sql_article_bad():
 
 
 def sql_comment_bad():
-    embed = discord.Embed(title='감시봇', colour=color)
+    embed = discord.Embed(title='ROBOT', colour=color)
     embed.set_author(name=version)
     embed.set_thumbnail(url=thumbnail_url_recycle)
-    embed.add_field(name="SQL에 저장된 데이터 감시 결과", value="금칙어가 포함된 것으로 보이는 댓글이 있습니다.", inline=False)
-    embed.add_field(name="게시글 번호", value="test", inline=False)
+    embed.add_field(name="SQL에 저장된 댓글 데이터 검사 결과", value="금칙어가 포함된 것으로 보이는 댓글이 있습니다.", inline=False)
+    embed.add_field(name="게시글 번호", value="카페를 참고하세요", inline=False)
     origin_time = datetime.utcnow() + timedelta(hours=9)
     now = str(origin_time)
     time = "기준 시간: " + now

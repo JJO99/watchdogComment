@@ -14,7 +14,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = personalInfo.sheet_id()
-SAMPLE_RANGE_NAME = 'Sheet1!A2:A30'
+SAMPLE_RANGE_NAME = 'Sheet1!A3:C30' #TODO: 추후 시트 변경
 
 
 def main():

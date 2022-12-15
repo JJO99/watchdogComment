@@ -4,7 +4,7 @@ def chrome_path(os):
     if os == "Darwin":
         return '../watchdogComment/pythonDIR/chromedriver'
     elif os == "Linux":
-        return '/usr/local/share/chromedriver'
+        return '/home/ubuntu/chromedriver'
     elif os == "Windows":
         return '..\watchdogComment\pythonDIR\chromedriver.exe'
 
